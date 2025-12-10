@@ -113,10 +113,10 @@ and also immense confidence.
 
 
 
-## CHAPTER 4 — The New Humility: A School Without Signatures
+## CHAPTER 4 — The New Humility: Art Without Signatures
 
-AA is a school without masters.
-Without manifestos carved in stone.
+AA is a movement without masters.
+Without experts to explain message and meaning.
 Without press releases naming genius.
 
 Its humility is structural:
@@ -127,7 +127,7 @@ This anonymity is not an aesthetic gimmick
 but a philosophical stance:
 the work is the message,
 and the message is free to travel
-without the weight of a reputation.
+without the weight of reputation.
 
 AA asks:
 What happens when the art is trusted
@@ -200,7 +200,7 @@ This creates the superpower loop:
 
 The loop is continuous.
 The loop is generative.
-The loop is the school’s engine of growth.
+The loop is the movement’s engine of growth.
 
 
 
@@ -258,14 +258,14 @@ not a market fabrication.
 
 This creates artworks with:
 
-intrinsic value
+- intrinsic value
 
-recorded resonance
+- recorded resonance
 
-transparent economics
+- transparent economics
 
-and scarcity-driven, collectors’ appeal
-without compromising AA principles.
+and a scarcity-driven, collectors’ appeal
+without compromising core principles.
 
 
 
@@ -278,28 +278,28 @@ but as an intentional foundation.
 
 A digital-first school allows:
 
-global access
+- global access
 
-anonymity for creators
+- anonymity for creators
 
-instant feedback loops
+- instant feedback loops
 
-scalable exhibitions
+- scalable exhibitions
 
-universal participation
+- universal participation
 
 
 The school grows through:
 
-online courses
+- online courses
 
-digital galleries
+- digital galleries
 
-community discussions
+- community discourse
 
-collective decoding practices
+- collective decoding practices
 
-value4value micro-engagements
+- value4value micro-engagements
 
 
 This is the birthplace of AA —
@@ -326,11 +326,11 @@ physical presence,
 and anonymous creators
 into a single cultural fabric.
 
-AA is a school that grows quietly,
-then suddenly all at once.
+AA is a movement that grows slowly,
+then suddenly, as it reaches critical mass.
 It is not a rebellion,
 nor a retreat,
-but an unfolding.
+but unfolding the future that we already knew.
 
 A new way of seeing.
 A new way of feeling.
@@ -339,7 +339,7 @@ A new way of belonging.
 
 And above all:
 a new way of letting art breathe
-without needing a name.
+without baggage.
 
 
 
