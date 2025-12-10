@@ -1,11 +1,9 @@
 # AA - ANONYMOUS ART MANIFESTO
 
-— a philosophical and creative framework for a new school of art —
-
 
 
 ## CONTENTS
-
+````
 Preface
 Chapter 1 The Prompt as Genesis
 Chapter 2 Code, Connection, and Decoding
@@ -20,7 +18,7 @@ Chapter 10 The Future of AA: Touring, Gathering, Becoming
 Appendix — MINE
 Appendix 
 
-
+````
 
 
 ## PREFACE
@@ -30,7 +28,7 @@ a signal, a pulse, a whisper that travels across cultures and screens,
 an idea that refuses to belong to anyone.
 
 This manifesto marks the emergence of Anonymous Art — AA —
-a school that does not restore a past,
+a movement that does not restore a past,
 nor revolt against a canon,
 but reveals a new way to make, to see, and to value art
 without ego, without signatures, without permission.
