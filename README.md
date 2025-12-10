@@ -330,21 +330,16 @@ physical presence,
 and anonymous creators
 into a single cultural fabric.
 
-AA is a movement that grows slowly,
-then suddenly, as it reaches critical mass.
-It is not a rebellion,
-nor a retreat,
-but unfolding the future that we already knew.
-
 A new way of seeing.
 A new way of feeling.
 A new way of valuing.
 A new way of belonging.
 
-And above all:
-a new way of letting art breathe
-without baggage.
-
+AA is a movement that grows slowly,
+then suddenly, as it gains momentum.
+It is not a rebellion,
+nor a retreat,
+but unfolding a future that we already knew.
 
 
 ## APPENDIX #1 - MINE
