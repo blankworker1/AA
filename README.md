@@ -419,6 +419,8 @@ A living experiment into how we perceive and interact with art.
 
 A study in hybridization.
 
+Project details: [https://github.com/blankworker1/AA/blob/main/BALANCE.md]
+
 
 
 ## APPENDIX #4 - FOOLS GOLD 
