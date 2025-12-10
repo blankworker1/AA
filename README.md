@@ -343,4 +343,69 @@ without baggage.
 
 
 
-APPENDIX — MINE
+## APPENDIX #1 - MINE
+
+MINE is a digital–physical hybrid artwork that embodies the principles of Anonymous Art while testing the edges of value, attention, and resonance.
+
+It begins as a digital artwork displayed in a gallery with a visible sale price
+— yet with no BUY button.
+The absence of transactional immediacy is intentional:
+the artwork must first prove its resonance.
+If the response is strong, the piece is repackaged
+into its final hybrid form.
+
+This physical incarnation is a self-contained cube - a clean geometric block with two active faces.
+One side holds a screen which displays the digital imagery
+One side is a Bitcoin miner with its own fan and miniature display
+
+Inside the block:
+a tablet, mining hardware, power supply,
+and all necessary components unified in a silent, sculptural presence.
+
+No stand — just a pure object.
+
+The cube interfaces directly with the collector:
+They can connect their own hardware,
+They can connect their own wallet,
+The artwork assumes its own identity (or none),
+making it a living conduit between digital value
+and personal participation.
+
+Resonance determines rarity.
+Scarcity determines price.
+Collectors are drawn not only to the object
+but to the record of its public reactions,
+which becomes part of its provenance.
+
+MINE is thus a loop:
+art creating attention,
+attention creating value,
+value creating form,
+form creating new meaning.
+
+A perfect embodiment of the Anonymous Art ethos.
+
+
+
+## APPENDIX #2 - OPEN SECRET 
+
+
+OPEN SECRET is a paradox in object form - an artwork that is simultaneously public and concealed. 
+
+It begins as a 30 x 30cm square canvas printed with a QR code, stark and unassuming, unframed like a traditional piece of graphic minimalism. 
+
+Yet beneath the surface, through an embedded NFC chip and decentralized storage, lies a hidden certificate of authenticity accessible only to those who choose to look. Immutable digital truth preserved on IFPS.
+
+The artwork lives in plain sight. Anyone may scan it. Anyone may interact with it. What they discover, however, is determined by their intent: a casual observer sees only a pattern, while the curious collector can discover hidden treasure. A pot of digital gold.
+
+OPEN SECRET explores how little an artwork needs to be visually present in order to carry deep conceptual weight. Its simplicity is deliberate. Its opacity is a feature. Its revelation depends on patience, curiosity, and the willingness to engage beyond the surface.
+
+The piece ultimately reflects the Anonymous Art philosophy: the value is not in the artist’s identity, but in the interaction between viewer and object. 
+
+A secret that is open to all, but understood by few.
+
+
+## APPENDIX #3 - BALANCE 
+
+
+
