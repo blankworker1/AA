@@ -3,6 +3,7 @@
 
 
 ## CONTENTS
+
 ````
 Preface
 Chapter 1 The Prompt as Genesis
@@ -15,8 +16,11 @@ Chapter 7 Collective Ownership and Public Meaning
 Chapter 8 The Economics of Value4Value
 Chapter 9 The Digital-First School
 Chapter 10 The Future of AA: Touring, Gathering, Becoming
-Appendix — MINE
-Appendix 
+Appendix #1 MINE
+Appendix #2 OPEN SECRET
+Appendix #3 BALANCE
+Appendix #4 FOOLS GOLD
+
 
 ````
 
@@ -392,7 +396,7 @@ A perfect embodiment of the Anonymous Art ethos.
 
 OPEN SECRET is a paradox in object form - an artwork that is simultaneously public and concealed. 
 
-It begins as a 30 x 30cm square canvas printed with a QR code, stark and unassuming, unframed like a traditional piece of graphic minimalism. 
+It begins as a 30cm x 30cm square canvas printed with a QR code, stark and unassuming, unframed like a traditional piece of graphic minimalism. 
 
 Yet beneath the surface, through an embedded NFC chip and decentralized storage, lies a hidden certificate of authenticity accessible only to those who choose to look. Immutable digital truth preserved on IFPS.
 
@@ -406,6 +410,39 @@ A secret that is open to all, but understood by few.
 
 
 ## APPENDIX #3 - BALANCE 
+
+
+BALANCE is a digital artwork that explores the quiet tension between abundance and scarcity. It exists as a screen-based digital image, presented in a gallery as a living image. A generative aesthetic that shifts gradually, requiring patience rather than demanding attention.
+
+But all is not what it seems. The simple image is a cover for something more complex. Behind the artwork there lies a simple digital dashboard, where all editions of OPEN SECRET artworks are listed, forming a shared yet anonymous constellation of ownership. 
+
+BALANCE is not offered for sale, but the viewer is invited to 'tip' the listed canvas artworks using the qr code that forms their image. An anonymous circular art ecconomy powered by Bitcoin Lightning Network.
+
+Nothing is hidden, yet nothing is revealed unnecessarily. The viewer becomes a part of a symbiotic relationship between the digital and the physical.
+
+A living experiment into how we perceive and interact with art.
+
+A study in hybridization.
+
+## APPENDIX #4 - FOOLS GOLD 
+
+FOOLS GOLD is a limited-edition artwork and gallery  performance that interrogates the mythology of precious metal through deliberate fakery, staged scarcity, and audience participation.
+
+The piece exists in two parts.
+
+The first is a set of 21 imitation gold bars, each identical in form but individually numbered. They look like gold but not solid gold. Their value is not material but conceptual, anchored in edition, narrative, and the collector’s willingness to believe in the fiction. 
+
+Each bar is packaged, displayed, authenticated, and paired with a digital certificate. The object is humble; the framework around it is what becomes precious.
+
+The second part is a live gallery performance in which the bars are presented, discussed, and ultimately released. Visitors are confronted with the tension between what looks valuable and what is valuable. 
+
+No explicit sales pitch is made. Participants may acquire a bar only by making a payment in Bitcoin, turning the act of acquisition into part of the artwork itself.
+
+This exposes the mechanisms through which society assigns worth: material scarcity, ritual, performance, and narrative. By removing the actual metal yet retaining the theatre of value, the artwork distills gold to its pure conceptual essence.
+
+FOOLS GOLD is not about wealth. It is about belief.
+
+The result captures perfectly the Anonymous Art ethos: scarcity without secrecy, ownership without identity, and value constructed in real time between the object, performance, and public.
 
 
 
