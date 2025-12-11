@@ -1,6 +1,6 @@
 # BALANCE 
 
-Minimalist digital artwork with dashboard linked to [OPEN SECRET](https://github.com/blankworker1/AA/blob/main/OPEN_SECRET.md) physical artworks and Blink wallets.
+Minimalist digital artwork with dashboard linked to [OPEN SECRET](https://github.com/blankworker1/AA/blob/main/OPEN_SECRET.md) physical artworks and [Blink]( https://www.blink.sv) wallets.
 
 
 ![BALANCE Artwork](https://green-deliberate-haddock-519.mypinata.cloud/ipfs/bafkreibpqedifacur2md3bqay4bihbpkqkguwgrysnxrw72h4dbiw2rrfe)
