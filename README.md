@@ -1,4 +1,13 @@
-# AA - ANONYMOUS ART MANIFESTO
+# AA
+
+
+
+
+
+(aa logo)
+
+
+## ANONYMOUS ART MANIFESTO
 
 
 
