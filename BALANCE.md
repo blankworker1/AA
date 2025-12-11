@@ -3,9 +3,9 @@
 Minimalist digital artwork with dashboard linked to OPEN SECRET physical artworks and Blink wallets.
 
 
-![BALANCE Artwork] (https://green-deliberate-haddock-519.mypinata.cloud/ipfs/bafkreig6butktlzf7ukrgjyx4gfseycizfvzzdp2ew5fqa5neb2bhfdibq)
+![BALANCE Artwork](https://green-deliberate-haddock-519.mypinata.cloud/ipfs/bafkreig6butktlzf7ukrgjyx4gfseycizfvzzdp2ew5fqa5neb2bhfdibq)
 
-![BALANCE Dashboard] (https://green-deliberate-haddock-519.mypinata.cloud/ipfs/bafkreiemkc4qlf3yuva22qfurr4u2x4nwrklinbbsfrddfbsj6n6wbhyku)
+![BALANCE Dashboard](https://green-deliberate-haddock-519.mypinata.cloud/ipfs/bafkreiemkc4qlf3yuva22qfurr4u2x4nwrklinbbsfrddfbsj6n6wbhyku)
 
 
 
