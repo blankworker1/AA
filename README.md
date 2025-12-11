@@ -4,10 +4,10 @@
 
 
 
-(aa logo)
+![Logo](https://green-deliberate-haddock-519.mypinata.cloud/ipfs/bafkreiazhxoleoxycbwmnoanciiuddzpphsliisl5lfrxkruecoper2vxq)
 
 
-## ANONYMOUS ART MANIFESTO
+## AA ANONYMOUS ART MANIFESTO
 
 
 
