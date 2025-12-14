@@ -329,8 +329,9 @@ AA logo + strapline
 
 No signatures except AA (stylised, not a person)
 
-````
 Suggested Text:
+
+````
 
 This document certifies that [Prospectus] is an original, limited-edition artwork issued by Anonymous Art Ltd.
 
