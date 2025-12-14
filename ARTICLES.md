@@ -1,4 +1,6 @@
-ARTICLES OF ASSOCIATION
+# ARTICLES OF ASSOCIATION
+
+ARTICLES OF ASSOCIATION 
 
 of
 
@@ -9,7 +11,7 @@ ANONYMOUS ART LTD
 
 ---
 
-1. INTERPRETATION
+### 1. INTERPRETATION
 
 1.1 In these Articles, unless the context otherwise requires:
 
@@ -37,7 +39,7 @@ ANONYMOUS ART LTD
 
 ---
 
-2. COMPANY OBJECTS
+### 2. COMPANY OBJECTS
 
 2.1 The Company is formed to operate as an artistic, cultural, and experimental entity.
 
@@ -48,7 +50,7 @@ ANONYMOUS ART LTD
 
 ---
 
-3. SHARE CAPITAL
+### 3. SHARE CAPITAL
 
 3.1 The share capital of the Company consists of 21 ordinary shares of £1,000,000 nominal value each.
 
@@ -59,7 +61,7 @@ ANONYMOUS ART LTD
 
 ---
 
-4. PARTLY PAID SHARES
+### 4. PARTLY PAID SHARES
 
 4.1 Each Share is issued as partly paid.
 
@@ -70,7 +72,7 @@ ANONYMOUS ART LTD
 
 ---
 
-5. PROHIBITION ON CALLS
+### 5. PROHIBITION ON CALLS
 
 5.1 The Directors shall have no authority to make calls on unpaid share capital.
 
@@ -84,7 +86,7 @@ this Article is first amended by special resolution.
 
 ---
 
-6. SHARE CERTIFICATES
+### 6. SHARE CERTIFICATES
 
 6.1 The Company shall issue a share certificate to each Shareholder.
 
@@ -97,7 +99,7 @@ this Article is first amended by special resolution.
 
 ---
 
-7. EDITIONS AND PARTICIPATION
+### 7. EDITIONS AND PARTICIPATION
 
 7.1 All Shares are ordinary shares, but participation rights are subject to edition status.
 
@@ -119,7 +121,7 @@ Residual Edition — conferring ownership without voting rights.
 
 ---
 
-8. VOTING RIGHTS
+### 8. VOTING RIGHTS
 
 8.1 Each Active Edition Share carries one vote.
 
@@ -148,7 +150,7 @@ disposal of core assets
 
 ---
 
-9. TRANSFER OF SHARES
+### 9. TRANSFER OF SHARES
 
 9.1 Shares may be transferred in accordance with the Act.
 
@@ -159,7 +161,7 @@ disposal of core assets
 
 ---
 
-10. DIRECTORS
+### 10. DIRECTORS
 
 10.1 The Company shall have at least one Director.
 
@@ -170,7 +172,7 @@ disposal of core assets
 
 ---
 
-11. ASSETS AND TREASURY
+### 11. ASSETS AND TREASURY
 
 11.1 The Company may hold assets including but not limited to:
 
@@ -192,7 +194,7 @@ intellectual property
 
 ---
 
-12. RECORDS AND REGISTERS
+### 12. RECORDS AND REGISTERS
 
 12.1 The Company shall maintain statutory registers as required by law.
 
@@ -203,7 +205,7 @@ intellectual property
 
 ---
 
-13. DIVIDENDS
+### 13. DIVIDENDS
 
 13.1 The Company is not obliged to declare dividends.
 
@@ -212,7 +214,7 @@ intellectual property
 
 ---
 
-14. DISSOLUTION
+### 14. DISSOLUTION
 
 14.1 The Company may be wound up only by Supermajority resolution.
 
@@ -221,11 +223,12 @@ intellectual property
 
 ---
 
-15. GENERAL
+### 15. GENERAL
 
 15.1 These Articles supersede any previous Articles.
 
 15.2 If any provision is held invalid, the remainder shall remain in force.
+
 
 
 ---
