@@ -1,4 +1,4 @@
-# Non-Executive Director (NED) — AA Ltd
+# Non-Executive Director (NED) - AA Ltd
 
 
 ## Position within AA
@@ -9,7 +9,7 @@ Their authority is collective, not individual.
 
 Each NED is appointed for their domain knowledge, but operates within a shared conceptual frame.
 
-
+---
 ## Core Responsibilities
 
 Provide independent oversight to the Director.
@@ -20,7 +20,7 @@ Represent a specific area of expertise (e.g. law, digital art, cryptography, fin
 
 Ensure that decisions remain aligned with the AA ethos, not short-term utility.
 
-
+---
 ## Role within the Artwork
 
 NEDs are not employees; they are participants.
@@ -34,7 +34,7 @@ They do not produce artworks.
 They protect the conditions under which artworks exist.
 
 
-
+---
 ## Governance & Power
 
 NEDs hold no executive power.
@@ -52,7 +52,7 @@ Trigger formal review
 Their influence is procedural, not performative.
 
 
-
+---
 ## Visibility & Anonymity
 
 NEDs may remain anonymous or pseudonymous, by choice.
@@ -61,7 +61,7 @@ Public recognition is not required; contribution outweighs attribution.
 
 Their role is to stabilize the system, not to promote themselves.
 
-
+---
 ## Term & Commitment
 
 Appointment is non-fixed, aligned with the 4-year AA cycle.
@@ -74,7 +74,7 @@ A NED may step down at any time without explanation.
 
 ---
 
-Ideal NED Profile
+## Ideal NED Profile
 
 Trusted, independent thinker.
 
@@ -86,7 +86,8 @@ Understands that AA is not a company pretending to be art, but art using the com
 
 ---
 
-Function in the System
+## Function in the System
+
 If the Director is the King,
 the NEDs are the Council.
 
@@ -103,7 +104,7 @@ Integrate old version into new version above.
 
 ---
 
-Non-Executive Directors (NEDs) / Key Advisors
+### Non-Executive Directors (NEDs) / Key Advisors
 
 Each NED represents a critical function, combining governance, advisory, and artistic narrative:
 
