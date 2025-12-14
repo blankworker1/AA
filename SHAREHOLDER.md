@@ -1,4 +1,4 @@
-# SHAREHOLDER - AALtd
+# SHAREHOLDER - AA Ltd
 
 
 Shareholders — also known as The Chosen
@@ -94,6 +94,7 @@ No background in art, finance, or technology is required.
 Shareholders provide stability, legitimacy, and continuity.
 
 They do not operate the system.
+
 They enable it to exist.
 
 AA functions because ownership is defined, finite, and held.
