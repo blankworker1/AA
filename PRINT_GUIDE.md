@@ -329,20 +329,22 @@ AA logo + strapline
 
 No signatures except AA (stylised, not a person)
 
+````
+Suggested Text:
 
-Suggested Text
+This document certifies that [Prospectus] is an original, limited-edition artwork issued by Anonymous Art Ltd.
 
-> This document certifies that the accompanying Prospectus is an original, limited-edition artwork issued by Anonymous Art Ltd.
+Edition: __ of 21
 
-Edition: ___ of 21
+Tag ID: [14 character NFC tag unique id]
 
-This Prospectus forms part of the Anonymous Art system and may not be reproduced.
+[Prospectus] forms part of the Anonymous Art system and may not be reproduced.
 
 Ownership of this object does not imply ownership of the ideas it contains.
 
 AA
 
-
+````
 
 This certificate is itself uploadable to IPFS and referenced by the NFC tag.
 
