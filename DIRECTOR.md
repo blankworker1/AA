@@ -91,11 +91,12 @@ The Director does not own the system.
 They hold it together.
 
 ---
+---
 
 OLD VERSION 
 
 
-Legal & Corporate Responsibilities
+## Legal & Corporate Responsibilities
 
 Acts as the legally responsible officer for AA Ltd.
 
