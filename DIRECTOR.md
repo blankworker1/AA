@@ -147,6 +147,3 @@ AA Ltd functions both as a legally compliant entity and as a living artwork. The
 
 
 
----
-
-If you like, I can also draft a similarly styled role description for the NEDs, showing how they act as a privy council/advisory layer within the artwork. Do you want me to do that next?
