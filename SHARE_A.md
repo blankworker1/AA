@@ -90,7 +90,7 @@ Its existence is recorded in the statutory register of the company.
 
 ---
 
-Tag ID: [14-character NFC ID]
+Tag ID: [14-character NFC ID] sticker attached to physical certificate.
 
 Digital record available via IPFS.
 
