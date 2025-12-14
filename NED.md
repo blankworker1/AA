@@ -19,7 +19,7 @@ NED Role	Responsibility / Advisory Functions:
 
 Number of NEDs: 6 (one per advisory area)
 
-Decision making process: Equal voting rights among NEDs. They act as a non binding collective advisory voice on governance and artistic decisions, in support of the company Director.
+Decision-making Function: Equal voting rights among NEDs. They act as a non binding collective advisory voice on governance and artistic decisions, in support of the company Director.
 
 Artistic Function: Each NED is a participant in the conceptual artwork, their advisory role forming part of the mythos
 
