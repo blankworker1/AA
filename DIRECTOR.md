@@ -1,6 +1,6 @@
-# Director - AA Ltd
+# DIRECTOR - AA Ltd
 
-
+Director - also known as The King
 
 ## Position within AA
 
