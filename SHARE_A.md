@@ -5,7 +5,8 @@
 ## FOUNDER SHARE CERTIFICATE — FRONT
 
 ANONYMOUS ART LTD
-(Incorporated in England and Wales)
+
+Incorporated in England and Wales - Company No. XXXXXXXX
 
 
 SHARE CERTIFICATE
@@ -31,6 +32,7 @@ It is both a legal instrument and a certificate artwork.
 Director: ____________________
 Date of Issue: _______________
 
+Issued subject to the Articles of Association of the Company
 
 ---
 
