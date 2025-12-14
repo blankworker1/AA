@@ -17,8 +17,6 @@ Each share in AA Ltd functions as both a legal instrument and a collectible cert
 Maximum issuance: 21 new certificates per 4-year cycle, ensuring predictable scarcity and traceable provenance.
 
 
----
-
 Rule 2 — Single Share Class per Cycle
 
 Each 4-year cycle has one class of active shares (A4 or C4). R4 shares are archival only.
