@@ -1,5 +1,6 @@
 # Non-Executive Director (NED) - AA Ltd
 
+NEDs - also known as The Witnesses 
 
 ## Position within AA
 
