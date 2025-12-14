@@ -105,7 +105,7 @@ AA functions because ownership is defined, finite, and held.
 ---
 
 
-<old version>
+OLD VERSION 
 
 Every UK limited company requires one or more shareholders. AA Ltd has 21 shareholders.
 
