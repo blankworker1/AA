@@ -1,4 +1,4 @@
-# AA ROI (Return on Investment) – Definition
+# AA Return on Investment (ROI)
 
 ## 1. Concept
 
