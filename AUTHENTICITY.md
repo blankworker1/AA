@@ -1,4 +1,4 @@
-# AA Certificate of Authenticity (COA)
+# AA Certificate of Authenticity
 
 ## 1. Nature and Purpose
    
