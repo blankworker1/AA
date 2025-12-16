@@ -8,7 +8,7 @@
 ## 2. Conversion and Certificate Retirement
 
 
-Upon the conversion of a Share from one class to another (including, without limitation, A4 → C4 or C4 → R4), the Shareholding shall be converted in accordance with these Articles and recorded in the register of members.
+Upon the conversion of a Share from one class to another (including, without limitation, A4 → C4 or C4 → R4), the Shareholding shall be converted in accordance with the Articles and recorded in the register of members.
 
 Upon such conversion, the original physical share certificate shall be deemed retired and legally inert, and shall cease to evidence any legal, voting, or economic rights in the Company.
 
@@ -23,9 +23,9 @@ Following conversion, the Company shall issue a Letter of Endorsement confirming
 (b) the retirement and legal inertness of the original physical certificate, and
 (c) the continuation of the Shareholding in the new Share class.
 
-The Letter of Endorsement shall be digitally recorded and published to a decentralized content-addressed storage system (including IPFS) in the same manner as a certificate of authenticity.
+The Letter of Endorsement shall be digitally recorded and published to a decentralized content-addressed storage system (including IPFS) in the same manner as a Certificate of Authenticity (COA).
 
-A reference or access link to the Letter of Endorsement shall be communicated to the Shareholder by electronic means, including via a Lightning message or equivalent cryptographically verifiable notification.
+A reference or access link to the Letter of Endorsement shall be communicated to the Shareholder by electronic means, including via a Lightning transaction message or equivalent cryptographically verifiable notification.
 
 
 ## 4. Emergence of AA ROI
@@ -50,7 +50,7 @@ Any realization of value from a retired certificate shall be separate from and s
 
 
 
-This definition applies to all Share classes (including A4, C4, and R4) and any successor or additional classes created pursuant to these Articles.
+This definition applies to all Share classes (including A4, C4, and R4) and any successor or additional classes created pursuant to the Articles.
 
 AA ROI is intentionally emergent and subjective, reflecting the separation of the Share as a legal instrument from the certificate as a collectible artifact.
 
