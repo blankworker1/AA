@@ -1,8 +1,10 @@
-# AA Return on Investment (ROI)
+# AA Letter of Endorsement 
 
-## 1. Concept
+## 1. Nature and Purpose 
 
- Definition - “AA ROI” shall mean the measurable benefit or value derived by a Shareholder upon the retirement or conversion of a Share, expressed through the collectible and market value of the physical certificate formerly evidencing that Share.
+A Letter of Endorsement is a document issued by the Company for evidentiary and record-keeping purposes only, confirming the conversion of a Share from one class to another and the retirement and legal inertness of the physical certificate formerly evidencing that Share. 
+
+It does not constitute, create, transfer, or evidence any legal, equitable, voting, or economic interest in the Company, and shall not be relied upon as proof of current share ownership, which shall be determined exclusively by entries in the register of members maintained in accordance with the Companies Act 2006.
 
 
 ## 2. Conversion and Certificate Retirement
@@ -28,20 +30,18 @@ The Letter of Endorsement shall be digitally recorded and published to a decentr
 A reference or access link to the Letter of Endorsement shall be communicated to the Shareholder by electronic means, including via a Lightning transaction message or equivalent cryptographically verifiable notification.
 
 
-## 4. Emergence of AA ROI
-
+## 4. Secondary Value 
 
 
 Upon issuance of the Letter of Endorsement, the retired physical certificate may be sold, auctioned, or otherwise transferred as a collectible limited edition.
 
-Any value realized from such sale or transfer shall constitute the Shareholder’s AA ROI, determined solely by market demand and reflecting scarcity, provenance, edition number, historical lineage, and cultural significance, rather than any rights formerly attached to the underlying Share.
+Any value realized from such sale or transfer shall constitute the Shareholder’s Return on Investment (ROI), determined solely by market demand and reflecting scarcity, provenance, edition number, historical lineage, and cultural significance, rather than any rights formerly attached to the underlying Share.
 
 
 ## 5. Calculation and Recognition
 
 
-
-The Company shall not fix, guarantee, or underwrite AA ROI, which is inherently market-determined and independent of the Company’s financial performance or distributions.
+The Company shall not fix, guarantee, or underwrite ROI, which is inherently market-determined and independent of the Company’s financial performance or distributions.
 
 Any realization of value from a retired certificate shall be separate from and shall not affect the rights, obligations, or status of the Shareholder in respect of the converted Share.
 
@@ -49,8 +49,5 @@ Any realization of value from a retired certificate shall be separate from and s
 ## 6. Scope
 
 
-
 This definition applies to all Share classes (including A4, C4, and R4) and any successor or additional classes created pursuant to the Articles.
-
-AA ROI is intentionally emergent and subjective, reflecting the separation of the Share as a legal instrument from the certificate as a collectible artifact.
 
