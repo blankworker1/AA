@@ -452,5 +452,45 @@ FOOLS GOLD is not about wealth. It is about belief.
 
 The result captures perfectly the Anonymous Art ethos: scarcity without secrecy, ownership without identity, and value constructed in real time between the object, performance, and public.
 
+---
+
+## APPENDIX #5 - 10 MINUTES 
+
+10 MINUTES is a live art performance that uses time as its primary material.
+
+The work treats time not as a backdrop for art, but as the force that shapes it. Creation is constrained, sequential, and irreversible. Nothing is revised. Nothing is paused. What exists is what survived the clock.
+
+The piece unfolds as a limited run performance.
+
+Ten identical blank canvases are mounted in a row on a wall. Only one canvas may be worked on at any moment. A single timechain clock governs the room, advancing in fixed ten-minute intervals.
+
+When the clock turns, a new artwork begins.
+
+When the clock turns again, it ends.
+
+Each ten-minute interval produces one artwork, titled simply Block [number]. The act of painting during that interval is the work itself. The effort, hesitation, and decision-making of the artist constitute the proof that the block exists.
+
+The audience participates continuously. Visitors are invited to draw, write, or sketch on paper and place their contributions into a shared pool. These fragments may be selected, incorporated, transformed, or ignored by the artist working in that block. Inclusion is not guaranteed. Accumulation does not imply acceptance.
+
+Value emerges through selection, not submission.
+
+At the close of each interval, the artwork is finalized. The artist stops immediately. The canvas is photographed and recorded. No further changes are permitted.
+
+Each block contains a visual reference to the block before it, marking continuity without revision. The sequence advances forward only.
+
+The performance continues for as long as artists are willing to work. When the final block completes, the clock stops. The room remains.
+
+10 MINUTES is not about money.
+
+It does not explain systems.
+
+It does not persuade.
+
+It places the audience inside a structure where time decides what survives.
+
+The work asks a single question:
+
+> What does it mean to create when time, not intention, has the final say?
+
 
 
