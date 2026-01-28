@@ -453,7 +453,6 @@ FOOLS GOLD is not about wealth. It is about belief.
 
 The result captures perfectly the Anonymous Art ethos: scarcity without secrecy, ownership without identity, and value constructed in real time between the object, performance, and public.
 
----
 
 ## APPENDIX #5 - 10 MINUTES 
 
