@@ -2,7 +2,11 @@
 
 Art as Time
 
-Live Performance Script — Limited Run Event
+---
+
+![Timechain calendar](https://emerald-real-clownfish-172.mypinata.cloud/ipfs/bafkreihs3gm7yaaaylkkvbwue4n5uugzbvnhk4c62prw65a7i5j7flapki)
+
+## Live Performance Script — Limited Run Event
 
 Duration: 1 hour 40 minutes approx
 
