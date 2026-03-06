@@ -1,94 +1,100 @@
 /**
- * Blink Dashboard API Integration
- * Fetches data for 21 wallets, tracks top 5 by balance,
- * and surfaces the latest tip (tx) per wallet in real time.
+ * â•”â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•—
+ * â•‘          OPENSECRET â€” Blink Dashboard Integration           â•‘
+ * â•‘          dashboard-app-uya.caffeine.xyz                     â•‘
+ * â•šâ•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
  *
- * Usage:
- *   1. Fill in WALLETS config below with each wallet's name and API key.
- *   2. Call BlinkDashboard.init() on page load.
- *   3. Implement the three callback hooks to wire into your existing UI:
- *        onTop5Update(wallets)   â€” fired when top 5 balances change
- *        onNewTip(tip)           â€” fired when a new transaction is detected
- *        onError(wallet, error)  â€” fired on any fetch failure
+ * Polls 21 separate Blink wallets, surfaces top 5 by balance,
+ * and detects new inbound tips in real time.
+ *
+ * SECURITY NOTE:
+ *   API keys must NOT live in this file in production.
+ *   See the "SECURITY" section below for the recommended
+ *   backend proxy pattern. The WALLETS array here uses
+ *   placeholder strings â€” populate them server-side or via
+ *   environment variables injected at build time.
+ *
+ * USAGE:
+ *   1. Replace placeholder API keys (or use the proxy pattern).
+ *   2. Call BlinkDashboard.init({ onTop5Update, onNewTip, onError })
+ *      once on page load.
+ *   3. Wire the three callbacks into your existing caffeine.ai UI.
  */
+
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// SECURITY â€” Backend Proxy Pattern (recommended for production)
+//
+// Instead of calling api.blink.sv directly from the browser,
+// route requests through your own server endpoint, e.g.:
+//
+//   POST /api/blink-proxy
+//   Body: { walletKeyId: "wallet_03", variables: { ... } }
+//
+// Your server holds the real API keys in env vars and forwards
+// the GraphQL request to Blink. The browser never sees a key.
+//
+// To enable: set USE_PROXY = true and set PROXY_URL below.
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+const USE_PROXY = false;
+const PROXY_URL = "/api/blink-proxy"; // your server endpoint
 
 const BlinkDashboard = (() => {
 
   // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-  // CONFIGURATION â€” fill in your 21 wallets here
+  // CONFIGURATION
+  // In production: load apiKey values from env vars
+  // or inject them server-side â€” never ship real keys
+  // in client-side source.
   // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   const WALLETS = [
-    { name: "Wallet 01", apiKey: "YOUR_API_KEY_01" },
-    { name: "Wallet 02", apiKey: "YOUR_API_KEY_02" },
-    { name: "Wallet 03", apiKey: "YOUR_API_KEY_03" },
-    { name: "Wallet 04", apiKey: "YOUR_API_KEY_04" },
-    { name: "Wallet 05", apiKey: "YOUR_API_KEY_05" },
-    { name: "Wallet 06", apiKey: "YOUR_API_KEY_06" },
-    { name: "Wallet 07", apiKey: "YOUR_API_KEY_07" },
-    { name: "Wallet 08", apiKey: "YOUR_API_KEY_08" },
-    { name: "Wallet 09", apiKey: "YOUR_API_KEY_09" },
-    { name: "Wallet 10", apiKey: "YOUR_API_KEY_10" },
-    { name: "Wallet 11", apiKey: "YOUR_API_KEY_11" },
-    { name: "Wallet 12", apiKey: "YOUR_API_KEY_12" },
-    { name: "Wallet 13", apiKey: "YOUR_API_KEY_13" },
-    { name: "Wallet 14", apiKey: "YOUR_API_KEY_14" },
-    { name: "Wallet 15", apiKey: "YOUR_API_KEY_15" },
-    { name: "Wallet 16", apiKey: "YOUR_API_KEY_16" },
-    { name: "Wallet 17", apiKey: "YOUR_API_KEY_17" },
-    { name: "Wallet 18", apiKey: "YOUR_API_KEY_18" },
-    { name: "Wallet 19", apiKey: "YOUR_API_KEY_19" },
-    { name: "Wallet 20", apiKey: "YOUR_API_KEY_20" },
-    { name: "Wallet 21", apiKey: "YOUR_API_KEY_21" },
+    { name: "Open Secret #1",  apiKey: "YOUR_API_KEY_01" },
+    { name: "Open Secret #2",  apiKey: "YOUR_API_KEY_02" },
+    { name: "Open Secret #3",  apiKey: "YOUR_API_KEY_03" },
+    { name: "Open Secret #4",  apiKey: "YOUR_API_KEY_04" },
+    { name: "Open Secret #5",  apiKey: "YOUR_API_KEY_05" },
+    { name: "Open Secret #6",  apiKey: "YOUR_API_KEY_06" },
+    { name: "Open Secret #7",  apiKey: "YOUR_API_KEY_07" },
+    { name: "Open Secret #8",  apiKey: "YOUR_API_KEY_08" },
+    { name: "Open Secret #9",  apiKey: "YOUR_API_KEY_09" },
+    { name: "Open Secret #10", apiKey: "YOUR_API_KEY_10" },
+    { name: "Open Secret #11", apiKey: "YOUR_API_KEY_11" },
+    { name: "Open Secret #12", apiKey: "YOUR_API_KEY_12" },
+    { name: "Open Secret #13", apiKey: "YOUR_API_KEY_13" },
+    { name: "Open Secret #14", apiKey: "YOUR_API_KEY_14" },
+    { name: "Open Secret #15", apiKey: "YOUR_API_KEY_15" },
+    { name: "Open Secret #16", apiKey: "YOUR_API_KEY_16" },
+    { name: "Open Secret #17", apiKey: "YOUR_API_KEY_17" },
+    { name: "Open Secret #18", apiKey: "YOUR_API_KEY_18" },
+    { name: "Open Secret #19", apiKey: "YOUR_API_KEY_19" },
+    { name: "Open Secret #20", apiKey: "YOUR_API_KEY_20" },
+    { name: "Open Secret #21", apiKey: "YOUR_API_KEY_21" },
   ];
 
-  const API_URL = "https://api.blink.sv/graphql";
-  const POLL_INTERVAL_MS = 10000; // Poll every 10 seconds
+  const BLINK_API_URL    = "https://api.blink.sv/graphql";
+  const POLL_INTERVAL_MS = 10000; // 10 seconds
 
   // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-  // HOOKS â€” wire these into your existing UI
+  // GRAPHQL QUERIES â€” two-step per wallet:
+  //
+  //  QUERY_WALLETS: gets wallet list + balances to
+  //                 identify the BTC walletId.
+  //
+  //  QUERY_TXS:    gets latest transaction using
+  //                defaultAccount.transactions with
+  //                walletIds filter â€” the documented
+  //                pattern per the Blink API spec.
+  //
+  // Fixes applied:
+  //  [FIX 1 â€” HIGH]   transactions at defaultAccount level,
+  //                   not on individual Wallet objects.
+  //  [FIX 2 â€” MEDIUM] settlementDisplayAmount (documented)
+  //                   instead of settlementAmount.
+  //  [FIX 3 â€” MEDIUM] username with safe null fallback.
+  //  [FIX 4 â€” LOW]    status field queried; only "SUCCESS"
+  //                   transactions trigger onNewTip.
   // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-
-  /**
-   * Called whenever the top 5 balances change.
-   * @param {Array} wallets - Sorted array of top 5 wallet objects:
-   *   [{ name, balance, username, walletId }, ...]
-   *   balance is in satoshis (integer)
-   */
-  let onTop5Update = (wallets) => {
-    console.log("[BlinkDashboard] Top 5 updated:", wallets);
-  };
-
-  /**
-   * Called whenever a NEW tip (inbound transaction) is detected on any wallet.
-   * Fires once per new transaction, in real time (within one poll cycle).
-   * @param {Object} tip - { walletName, username, amount, memo, txId, timestamp }
-   *   amount is in satoshis (integer)
-   */
-  let onNewTip = (tip) => {
-    console.log("[BlinkDashboard] New tip:", tip);
-  };
-
-  /**
-   * Called when a wallet fetch fails.
-   * @param {Object} wallet - The wallet config { name, apiKey }
-   * @param {Error} error
-   */
-  let onError = (wallet, error) => {
-    console.warn(`[BlinkDashboard] Error fetching ${wallet.name}:`, error.message);
-  };
-
-  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-  // INTERNAL STATE
-  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-  const _lastTxIds = {}; // walletName -> last seen txId
-  let _pollTimer = null;
-
-  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-  // GRAPHQL QUERY
-  // Fetches username, BTC balance, and the latest transaction
-  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-  const QUERY = `
-    query DashboardWalletData {
+  const QUERY_WALLETS = `
+    query GetWallets {
       me {
         username
         defaultAccount {
@@ -96,15 +102,26 @@ const BlinkDashboard = (() => {
             id
             walletCurrency
             balance
-            transactions(first: 1) {
-              edges {
-                node {
-                  id
-                  direction
-                  settlementAmount
-                  memo
-                  createdAt
-                }
+          }
+        }
+      }
+    }
+  `;
+
+  const QUERY_TXS = `
+    query GetLatestTx($walletId: WalletId!) {
+      me {
+        defaultAccount {
+          transactions(walletIds: [$walletId], first: 1) {
+            edges {
+              node {
+                id
+                status
+                direction
+                settlementDisplayAmount
+                settlementCurrency
+                memo
+                createdAt
               }
             }
           }
@@ -114,115 +131,164 @@ const BlinkDashboard = (() => {
   `;
 
   // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-  // FETCH A SINGLE WALLET
+  // HOOKS â€” defaults log to console until replaced
   // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-  async function _fetchWallet(wallet) {
-    const response = await fetch(API_URL, {
+  let onTop5Update = (wallets) => console.log("[BlinkDashboard] Top 5:", wallets);
+  let onNewTip     = (tip)     => console.log("[BlinkDashboard] New tip:", tip);
+  let onError      = (wallet, err) =>
+    console.warn(`[BlinkDashboard] ${wallet.name}:`, err.message);
+
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // INTERNAL STATE
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  const _lastTxIds    = {};  // walletName â†’ last seen txId
+  const _errorBackoff = {};  // walletName â†’ consecutive error count
+  let   _pollTimer    = null;
+
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // HTTP helper â€” direct or proxied
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  async function _gql(apiKey, query, variables = {}) {
+    const url     = USE_PROXY ? PROXY_URL : BLINK_API_URL;
+    const headers = { "Content-Type": "application/json" };
+
+    if (USE_PROXY) {
+      // Proxy maps walletKeyId â†’ real API key on the server.
+      // The browser never sees the actual key value.
+      headers["X-Wallet-Key-Id"] = apiKey;
+    } else {
+      headers["X-API-KEY"] = apiKey;
+    }
+
+    const response = await fetch(url, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-API-KEY": wallet.apiKey,
-      },
-      body: JSON.stringify({ query: QUERY }),
+      headers,
+      body: JSON.stringify({ query, variables }),
     });
 
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}`);
-    }
-
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const json = await response.json();
+    if (json.errors) throw new Error(json.errors[0].message);
+    return json.data;
+  }
 
-    if (json.errors) {
-      throw new Error(json.errors[0].message);
-    }
-
-    const me = json.data?.me;
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // FETCH A SINGLE WALLET (two API calls)
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  async function _fetchWallet(wallet) {
+    // Call 1: get wallet list and balances
+    const data1      = await _gql(wallet.apiKey, QUERY_WALLETS);
+    const me         = data1?.me;
     if (!me) throw new Error("No user data returned");
 
-    const username = me.username;
-    const wallets = me.defaultAccount?.wallets ?? [];
+    // [FIX 3] username may not be in all schema versions â€” safe fallback
+    const username   = me.username ?? wallet.name;
+    const allWallets = me.defaultAccount?.wallets ?? [];
 
-    // Prefer the BTC wallet; fall back to first wallet
-    const btcWallet = wallets.find(w => w.walletCurrency === "BTC") ?? wallets[0];
-    if (!btcWallet) throw new Error("No wallet found");
+    // Prefer BTC wallet, fall back to first available
+    const btcWallet  = allWallets.find(w => w.walletCurrency === "BTC") ?? allWallets[0];
+    if (!btcWallet) throw new Error("No BTC wallet found");
 
-    const balance = btcWallet.balance; // satoshis
-    const walletId = btcWallet.id;
-
-    const latestEdge = btcWallet.transactions?.edges?.[0];
-    const latestTx = latestEdge?.node ?? null;
+    // Call 2: get latest transaction for this specific walletId
+    // [FIX 1] transactions queried at defaultAccount level with walletIds filter
+    const data2      = await _gql(wallet.apiKey, QUERY_TXS, { walletId: btcWallet.id });
+    const account2   = data2?.me?.defaultAccount;
+    const latestEdge = account2?.transactions?.edges?.[0];
+    const latestTx   = latestEdge?.node ?? null;
 
     return {
-      name: wallet.name,
+      name:     wallet.name,
       username,
-      walletId,
-      balance,
+      walletId: btcWallet.id,
+      balance:  btcWallet.balance, // integer satoshis
       latestTx: latestTx ? {
-        id: latestTx.id,
-        direction: latestTx.direction,   // "RECEIVE" | "SEND"
-        amount: latestTx.settlementAmount, // satoshis, negative for sends
-        memo: latestTx.memo ?? "",
+        id:        latestTx.id,
+        status:    latestTx.status,                 // [FIX 4] "SUCCESS"|"PENDING"|"FAILURE"
+        direction: latestTx.direction,               // "RECEIVE" | "SEND"
+        amount:    latestTx.settlementDisplayAmount, // [FIX 2] documented string e.g. "500"
+        currency:  latestTx.settlementCurrency,      // e.g. "BTC"
+        memo:      latestTx.memo ?? "",
         timestamp: latestTx.createdAt,
       } : null,
     };
   }
 
   // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-  // POLL ALL 21 WALLETS IN PARALLEL
+  // [FIX 5] STAGGERED POLLING â€” rate limit defence
+  //
+  // 21 wallets Ã— 2 calls = 42 requests per poll cycle.
+  // Split into 3 groups of 7, staggered by 3 seconds each:
+  //   Group 1 fires at t=0s  (14 requests)
+  //   Group 2 fires at t=3s  (14 requests)
+  //   Group 3 fires at t=6s  (14 requests)
+  // This spreads load vs. 42 simultaneous requests.
   // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  function _chunkArray(arr, size) {
+    const chunks = [];
+    for (let i = 0; i < arr.length; i += size) chunks.push(arr.slice(i, i + size));
+    return chunks;
+  }
+
   async function _pollAll() {
-    const results = await Promise.allSettled(
-      WALLETS.map(w => _fetchWallet(w))
-    );
+    const groups     = _chunkArray(WALLETS, 7);
+    const allResults = [];
 
-    const successful = [];
+    for (let g = 0; g < groups.length; g++) {
+      if (g > 0) await new Promise(r => setTimeout(r, 3000)); // 3s stagger
 
-    results.forEach((result, i) => {
-      if (result.status === "fulfilled") {
-        successful.push(result.value);
-      } else {
-        onError(WALLETS[i], result.reason);
-      }
-    });
+      const groupResults = await Promise.allSettled(
+        groups[g].map(w => _fetchWallet(w))
+      );
+
+      groupResults.forEach((result, i) => {
+        const wallet = groups[g][i];
+        if (result.status === "fulfilled") {
+          _errorBackoff[wallet.name] = 0;
+          allResults.push(result.value);
+        } else {
+          _errorBackoff[wallet.name] = (_errorBackoff[wallet.name] ?? 0) + 1;
+          onError(wallet, result.reason);
+        }
+      });
+    }
 
     // â”€â”€ Top 5 by balance â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-    const top5 = successful
+    const top5 = allResults
       .slice()
       .sort((a, b) => b.balance - a.balance)
       .slice(0, 5)
       .map(({ name, username, walletId, balance }) => ({
-        name, username, walletId, balance,
-        balanceBTC: (balance / 1e8).toFixed(8),        // formatted BTC string
-        balanceSats: balance.toLocaleString() + " sats" // formatted sats string
+        name,
+        username,
+        walletId,
+        balance,
+        balanceSats: balance.toLocaleString(), // e.g. "2,577" â€” matches dashboard
+        balanceBTC:  (balance / 1e8).toFixed(8),
       }));
 
     onTop5Update(top5);
 
-    // â”€â”€ New tips detection â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-    // A "tip" is any RECEIVE transaction we haven't seen before
-    successful.forEach(wallet => {
+    // â”€â”€ New tip detection â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    allResults.forEach(wallet => {
       const tx = wallet.latestTx;
       if (!tx) return;
       if (tx.direction !== "RECEIVE") return;
+      if (tx.status    !== "SUCCESS") return; // [FIX 4] skip pending/failed
 
       const prevId = _lastTxIds[wallet.name];
       if (prevId === tx.id) return; // already seen
 
-      // It's new â€” fire the hook
       _lastTxIds[wallet.name] = tx.id;
-
-      // Skip firing on the very first poll (just initialise state)
-      if (prevId === undefined) return;
+      if (prevId === undefined) return; // first poll â€” initialise only, don't fire
 
       onNewTip({
-        walletName: wallet.name,
-        username: wallet.username,
-        amount: tx.amount,
-        amountBTC: (tx.amount / 1e8).toFixed(8),
-        amountSats: tx.amount.toLocaleString() + " sats",
-        memo: tx.memo,
-        txId: tx.id,
-        timestamp: tx.timestamp,
+        walletName: wallet.name,   // â†’ "Artwork" column   e.g. "Open Secret #7"
+        username:   wallet.username,
+        amount:     tx.amount,     // â†’ "Latest TX" column e.g. "500"
+        currency:   tx.currency,   // e.g. "BTC"
+        comment:    tx.memo || "â€”", // â†’ "Comment" column  e.g. "Beautiful work"
+        txId:       tx.id,
+        timestamp:  tx.timestamp,
       });
     });
   }
@@ -232,27 +298,23 @@ const BlinkDashboard = (() => {
   // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
   /**
-   * Start the dashboard polling.
+   * Start the dashboard.
    * @param {Object} callbacks
-   *   {
-   *     onTop5Update: (wallets) => void,
-   *     onNewTip:     (tip) => void,
-   *     onError:      (wallet, error) => void   [optional]
-   *   }
+   *   onTop5Update(wallets) â€” top 5 by balance, fires every poll cycle
+   *   onNewTip(tip)         â€” fires once per new inbound tip detected
+   *   onError(wallet, err)  â€” fires per-wallet on fetch failure [optional]
    */
   function init(callbacks = {}) {
     if (callbacks.onTop5Update) onTop5Update = callbacks.onTop5Update;
     if (callbacks.onNewTip)     onNewTip     = callbacks.onNewTip;
     if (callbacks.onError)      onError      = callbacks.onError;
 
-    // Run immediately, then on interval
     _pollAll();
     _pollTimer = setInterval(_pollAll, POLL_INTERVAL_MS);
-
-    console.log("[BlinkDashboard] Started. Polling every", POLL_INTERVAL_MS / 1000, "seconds.");
+    console.log("[BlinkDashboard] Started â€” polling every", POLL_INTERVAL_MS / 1000, "s");
   }
 
-  /** Stop polling. */
+  /** Stop all polling. */
   function stop() {
     if (_pollTimer) {
       clearInterval(_pollTimer);
@@ -261,55 +323,62 @@ const BlinkDashboard = (() => {
     }
   }
 
-  /** Trigger an immediate refresh outside of the poll cycle. */
-  function refresh() {
-    _pollAll();
-  }
+  /** Force an immediate refresh outside the normal poll cycle. */
+  function refresh() { _pollAll(); }
 
   return { init, stop, refresh };
 
 })();
 
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-// EXAMPLE â€” wire into your existing dashboard UI
-// Remove or replace with your actual UI code.
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// WIRE-UP â€” connect to your caffeine.ai frontend
+//
+// Replace querySelector selectors with your actual element
+// IDs / class names. Column mapping matches your dashboard:
+//
+//  BALANCE table â†’ Position | Artwork      | Balance
+//  TIPS table    â†’ Latest TX | Artwork     | Comment
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 BlinkDashboard.init({
 
-  // Called whenever top 5 balances change
+  // â”€â”€ BALANCE TABLE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // Fires every poll cycle with top 5 sorted by balance.
   onTop5Update(wallets) {
-    // wallets = [{ name, username, balance, balanceBTC, balanceSats }, ...]
-    // Example: update your leaderboard rows
+    // wallets[0] = #1 (highest), wallets[4] = #5
+    // { name, balanceSats, balanceBTC, username }
+
     wallets.forEach((w, i) => {
-      const row = document.querySelector(`#top5-row-${i + 1}`);
+      const row = document.querySelector(`#balance-row-${i + 1}`);
       if (!row) return;
-      row.querySelector(".wallet-name").textContent  = w.name;
-      row.querySelector(".wallet-balance").textContent = w.balanceSats;
+      row.querySelector(".col-artwork").textContent = w.name;        // "Open Secret #7"
+      row.querySelector(".col-balance").textContent = w.balanceSats; // "2,577"
     });
   },
 
-  // Called when a new inbound tip is detected
+  // â”€â”€ TIPS TABLE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // Fires once per new inbound tip. Prepends so newest is
+  // always the top row.
   onNewTip(tip) {
-    // tip = { walletName, username, amount, amountSats, amountBTC, memo, txId, timestamp }
-    // Example: prepend to your Tips feed
-    const feed = document.querySelector("#tips-feed");
-    if (!feed) return;
+    // tip.amount     â†’ "Latest TX" column  e.g. "500"
+    // tip.walletName â†’ "Artwork" column    e.g. "Open Secret #7"
+    // tip.comment    â†’ "Comment" column    e.g. "Beautiful work"
 
-    const item = document.createElement("div");
-    item.className = "tip-item";
-    item.innerHTML = `
-      <span class="tip-wallet">${tip.walletName}</span>
-      <span class="tip-amount">${tip.amountSats}</span>
-      <span class="tip-memo">${tip.memo || "â€”"}</span>
+    const tbody = document.querySelector("#tips-table tbody");
+    if (!tbody) return;
+
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td class="col-latest-tx">${tip.amount}</td>
+      <td class="col-artwork">${tip.walletName}</td>
+      <td class="col-comment">${tip.comment}</td>
     `;
-    feed.prepend(item); // newest tip at top
+    tbody.prepend(tr);
   },
 
-  // Optional: handle errors per wallet
   onError(wallet, error) {
-    console.warn(`Could not reach ${wallet.name}: ${error.message}`);
+    console.warn(`[${wallet.name}] fetch failed: ${error.message}`);
   }
 
 });
