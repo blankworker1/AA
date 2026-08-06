@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>BINARY/TEXT</title>
+<style>
+  :root{
+    --iron-1:#0d0c0a;
+    --iron-2:#1c1a16;
+    --plate-1:#3a3d3f;
+    --plate-2:#232527;
+    --plate-edge:#57595b;
+    --rivet:#111213;
+    --ivory:#ddd6c4;
+    --ivory-shadow:#a89d80;
+    --brass:#8a7a54;
+    --brass-light:#c9b686;
+    --off:#6c675a;
+    --on:#8f2c22;
+    --on-light:#b6483a;
+    --engrave:#25231d;
+  }
+
+  *{ box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+
+  html,body{
+    height:100%;
+    margin:0;
+    background:
+      radial-gradient(ellipse at 50% 35%, var(--iron-2) 0%, var(--iron-1) 72%);
+    overflow-y:auto;
+    overflow-x:hidden;
+    touch-action:manipulation;
+  }
+
+  body{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:100vh;
+    padding:16px;
+  }
+
+  .rig{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:clamp(14px, 4vh, 28px);
+    width:100%;
+    max-width:640px;
+  }
+
+  /* ---- plate housing the sliders ---- */
+  .panel{
+    position:relative;
+    width:100%;
+    padding:clamp(12px, 3vh, 22px) clamp(10px, 3vw, 20px);
+    border-radius:6px;
+    background:
+      linear-gradient(155deg, var(--plate-1) 0%, var(--plate-2) 60%, #1a1c1d 100%);
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.06) inset,
+      0 -1px 0 rgba(0,0,0,0.5) inset,
+      0 18px 40px rgba(0,0,0,0.55),
+      0 2px 0 rgba(0,0,0,0.4);
+    border:1px solid #131414;
+  }
+
+  .rivet{
+    position:absolute;
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background: radial-gradient(circle at 35% 30%, #7a7c7e, var(--rivet) 70%);
+    box-shadow: 0 1px 1px rgba(0,0,0,0.8);
+  }
+  .rivet.tl{ top:9px; left:9px; }
+  .rivet.tr{ top:9px; right:9px; }
+  .rivet.bl{ bottom:9px; left:9px; }
+  .rivet.br{ bottom:9px; right:9px; }
+
+  .rack{
+    display:flex;
+    align-items:stretch;
+    gap: clamp(6px, 1.6vw, 14px);
+    width:100%;
+  }
+
+  .slots{
+    display:grid;
+    grid-template-columns: repeat(11, 1fr);
+    gap: clamp(3px, 1vw, 8px);
+    flex:1 1 auto;
+    min-width:0;
+  }
+
+  /* ---- push button, end of row ---- */
+  .press{
+    position:relative;
+    flex:0 0 auto;
+    width:clamp(30px, 7vw, 46px);
+    aspect-ratio: 1 / 1;
+    align-self:center;
+    border-radius:50%;
+    border:none;
+    padding:0;
+    cursor:pointer;
+    background: radial-gradient(circle at 32% 28%, #cbb789, var(--brass) 55%, #6e5e3c 100%);
+    box-shadow:
+      0 0 0 1px #4a3f28,
+      0 0 0 3px rgba(0,0,0,0.35),
+      inset 0 1px 1px rgba(255,255,255,0.5),
+      inset 0 -3px 4px rgba(0,0,0,0.35),
+      0 3px 4px rgba(0,0,0,0.55);
+    -webkit-tap-highlight-color:transparent;
+  }
+  .press:active{
+    box-shadow:
+      0 0 0 1px #4a3f28,
+      0 0 0 3px rgba(0,0,0,0.35),
+      inset 0 2px 4px rgba(0,0,0,0.5);
+    transform: translateY(1px);
+  }
+  .press.clear{
+    background: radial-gradient(circle at 32% 28%, var(--on-light), var(--on) 55%, #4d140f 100%);
+    box-shadow:
+      0 0 0 1px #3a0f0b,
+      0 0 0 3px rgba(0,0,0,0.35),
+      inset 0 1px 1px rgba(255,255,255,0.35),
+      inset 0 -3px 4px rgba(0,0,0,0.4),
+      0 3px 4px rgba(0,0,0,0.55);
+  }
+  .press.clear:active{
+    box-shadow:
+      0 0 0 1px #3a0f0b,
+      0 0 0 3px rgba(0,0,0,0.35),
+      inset 0 2px 4px rgba(0,0,0,0.55);
+    transform: translateY(1px);
+  }
+
+  /* ---- typed-letter echo ---- */
+  .buffer-rack{
+    display:flex;
+    align-items:stretch;
+    gap: clamp(6px, 1.6vw, 14px);
+    width:100%;
+    margin-bottom: clamp(10px, 2.4vh, 18px);
+  }
+  .buffer{
+    position:relative;
+    width:100%;
+    min-height:clamp(40px, 9vw, 58px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:3px;
+    background: linear-gradient(180deg, #cfc7ac, var(--ivory) 12%, var(--ivory) 88%, #c7bfa4);
+    box-shadow:
+      0 0 0 1px var(--brass),
+      0 0 0 2px rgba(0,0,0,0.35),
+      inset 0 1px 2px rgba(255,255,255,0.5),
+      inset 0 -3px 5px rgba(0,0,0,0.18),
+      0 2px 3px rgba(0,0,0,0.5);
+    overflow:hidden;
+    padding:0 10px;
+    flex:1 1 auto;
+    min-width:0;
+  }
+  .buffer-index{
+    position:absolute;
+    left:12px;
+    top:50%;
+    transform:translateY(-50%);
+    font-family: 'Courier New', monospace;
+    font-size: clamp(12px, 3.4vw, 17px);
+    font-weight:700;
+    letter-spacing:0.5px;
+    color: var(--ivory-shadow);
+    opacity:0.75;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.4);
+    pointer-events:none;
+  }
+  .buffer-text{
+    font-family: 'Courier New', monospace;
+    font-size: clamp(16px, 6vw, 26px);
+    font-weight:700;
+    letter-spacing:4px;
+    text-transform:uppercase;
+    color: var(--engrave);
+    opacity:0.85;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+    white-space:nowrap;
+  }
+
+  /* ---- keyboard ---- */
+  .keys{
+    display:flex;
+    flex-direction:column;
+    gap: clamp(4px, 1.2vw, 8px);
+    flex:1 1 auto;
+    min-width:0;
+  }
+  .krow{
+    display:grid;
+    gap: clamp(3px, 1vw, 8px);
+    width:100%;
+  }
+  .krow[data-row="1"]{ grid-template-columns: repeat(10, 1fr); }
+  .krow[data-row="2"]{ grid-template-columns: repeat(9, 1fr); padding:0 3.5%; }
+  .krow[data-row="3"]{ grid-template-columns: repeat(7, 1fr); padding:0 7%; }
+
+  .key{
+    position:relative;
+    width:100%;
+    aspect-ratio: 1 / 1;
+    border-radius:3px;
+    background: linear-gradient(180deg, #cfc7ac, var(--ivory) 12%, var(--ivory) 88%, #c7bfa4);
+    box-shadow:
+      0 0 0 1px var(--brass),
+      0 0 0 2px rgba(0,0,0,0.35),
+      inset 0 1px 2px rgba(255,255,255,0.5),
+      inset 0 -3px 5px rgba(0,0,0,0.18),
+      0 2px 3px rgba(0,0,0,0.5);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    user-select:none;
+    border:none;
+    padding:0;
+    font-family: 'Courier New', monospace;
+    font-size: clamp(13px, 4.6vw, 21px);
+    font-weight:700;
+    text-transform:uppercase;
+    color: var(--engrave);
+    opacity:0.85;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+    transition: opacity 0.15s ease, filter 0.15s ease;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .key:active{ filter:brightness(0.94); }
+  .key.disabled{
+    opacity:0.16;
+    filter:grayscale(70%);
+    cursor:default;
+    pointer-events:none;
+  }
+
+  /* ---- individual in/out slider ---- */
+  .slot{
+    position:relative;
+    width:100%;
+    aspect-ratio: 44 / 64;
+    border-radius:3px;
+    background: linear-gradient(180deg, #cfc7ac, var(--ivory) 12%, var(--ivory) 88%, #c7bfa4);
+    box-shadow:
+      0 0 0 1px var(--brass),
+      0 0 0 2px rgba(0,0,0,0.35),
+      inset 0 1px 2px rgba(255,255,255,0.5),
+      inset 0 -3px 5px rgba(0,0,0,0.18),
+      0 2px 3px rgba(0,0,0,0.5);
+    cursor:pointer;
+    user-select:none;
+    overflow:hidden;
+  }
+  .slot.static{ cursor:default; }
+
+  .digit{
+    position:absolute;
+    left:0; right:0;
+    text-align:center;
+    font-family: 'Courier New', monospace;
+    font-size:clamp(16px, 8vw, 30px);
+    font-weight:700;
+    line-height:1;
+    color: var(--engrave);
+    opacity:0.8;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+  }
+  .digit.d1{ top:6%; }
+  .digit.d0{ bottom:6%; }
+
+  .knob{
+    position:absolute;
+    left:8%;
+    width:84%;
+    height:36%;
+    border-radius:2px;
+    background: linear-gradient(180deg, var(--off) 0%, #4c4a41 55%, #3a3830 100%);
+    box-shadow:
+      0 0 0 1px rgba(0,0,0,0.55),
+      inset 0 1px 1px rgba(255,255,255,0.25),
+      inset 0 -2px 3px rgba(0,0,0,0.35),
+      0 2px 3px rgba(0,0,0,0.45);
+    top:8%;
+    transition: top 0.16s cubic-bezier(.4,0,.2,1), background 0.2s ease;
+  }
+  .knob::after{
+    content:"";
+    position:absolute;
+    left:50%; top:50%;
+    width:34%; height:2px;
+    background:rgba(255,255,255,0.18);
+    transform:translate(-50%,-50%);
+  }
+
+  .slot[data-state="1"] .knob{
+    top:56%;
+    background: linear-gradient(180deg, var(--on-light) 0%, var(--on) 55%, #6e1f18 100%);
+  }
+  .slot[data-state="0"] .knob{
+    top:8%;
+    background: linear-gradient(180deg, #82817a 0%, #58564d 55%, #403e37 100%);
+  }
+
+  .slot:active .knob{
+    filter: brightness(1.08);
+  }
+
+  .bits-rack{
+    margin-bottom: clamp(12px, 2.8vh, 20px);
+  }
+
+</style>
+</head>
+<body>
+
+  <div class="rig">
+    <div class="panel" id="panel">
+      <div class="rivet tl"></div>
+      <div class="rivet tr"></div>
+      <div class="rivet bl"></div>
+      <div class="rivet br"></div>
+
+      <div class="rack buffer-rack">
+        <div class="buffer" id="buffer">
+          <div class="buffer-index" id="bufferIndex"></div>
+          <div class="buffer-text" id="bufferText"></div>
+        </div>
+        <button class="press clear" id="clear" aria-label="Clear"></button>
+      </div>
+
+      <div class="rack bits-rack">
+        <div class="slots bits-row" id="bits"></div>
+        <button class="press" id="reveal" aria-label="Reveal word from sliders"></button>
+      </div>
+
+      <div class="keys" id="keys">
+        <div class="krow" data-row="1" id="row1"></div>
+        <div class="krow" data-row="2" id="row2"></div>
+        <div class="rack">
+          <div class="krow" data-row="3" id="row3"></div>
+          <button class="press" id="backspace" aria-label="Delete last letter"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+(function(){
+  var WORDS = ["abandon", "ability", "able", "about", "above", "absent", "absorb", "abstract", "absurd", "abuse", "access", "accident", "account", "accuse", "achieve", "acid", "acoustic", "acquire", "across", "act", "action", "actor", "actress", "actual", "adapt", "add", "addict", "address", "adjust", "admit", "adult", "advance", "advice", "aerobic", "affair", "afford", "afraid", "again", "age", "agent", "agree", "ahead", "aim", "air", "airport", "aisle", "alarm", "album", "alcohol", "alert", "alien", "all", "alley", "allow", "almost", "alone", "alpha", "already", "also", "alter", "always", "amateur", "amazing", "among", "amount", "amused", "analyst", "anchor", "ancient", "anger", "angle", "angry", "animal", "ankle", "announce", "annual", "another", "answer", "antenna", "antique", "anxiety", "any", "apart", "apology", "appear", "apple", "approve", "april", "arch", "arctic", "area", "arena", "argue", "arm", "armed", "armor", "army", "around", "arrange", "arrest", "arrive", "arrow", "art", "artefact", "artist", "artwork", "ask", "aspect", "assault", "asset", "assist", "assume", "asthma", "athlete", "atom", "attack", "attend", "attitude", "attract", "auction", "audit", "august", "aunt", "author", "auto", "autumn", "average", "avocado", "avoid", "awake", "aware", "away", "awesome", "awful", "awkward", "axis", "baby", "bachelor", "bacon", "badge", "bag", "balance", "balcony", "ball", "bamboo", "banana", "banner", "bar", "barely", "bargain", "barrel", "base", "basic", "basket", "battle", "beach", "bean", "beauty", "because", "become", "beef", "before", "begin", "behave", "behind", "believe", "below", "belt", "bench", "benefit", "best", "betray", "better", "between", "beyond", "bicycle", "bid", "bike", "bind", "biology", "bird", "birth", "bitter", "black", "blade", "blame", "blanket", "blast", "bleak", "bless", "blind", "blood", "blossom", "blouse", "blue", "blur", "blush", "board", "boat", "body", "boil", "bomb", "bone", "bonus", "book", "boost", "border", "boring", "borrow", "boss", "bottom", "bounce", "box", "boy", "bracket", "brain", "brand", "brass", "brave", "bread", "breeze", "brick", "bridge", "brief", "bright", "bring", "brisk", "broccoli", "broken", "bronze", "broom", "brother", "brown", "brush", "bubble", "buddy", "budget", "buffalo", "build", "bulb", "bulk", "bullet", "bundle", "bunker", "burden", "burger", "burst", "bus", "business", "busy", "butter", "buyer", "buzz", "cabbage", "cabin", "cable", "cactus", "cage", "cake", "call", "calm", "camera", "camp", "can", "canal", "cancel", "candy", "cannon", "canoe", "canvas", "canyon", "capable", "capital", "captain", "car", "carbon", "card", "cargo", "carpet", "carry", "cart", "case", "cash", "casino", "castle", "casual", "cat", "catalog", "catch", "category", "cattle", "caught", "cause", "caution", "cave", "ceiling", "celery", "cement", "census", "century", "cereal", "certain", "chair", "chalk", "champion", "change", "chaos", "chapter", "charge", "chase", "chat", "cheap", "check", "cheese", "chef", "cherry", "chest", "chicken", "chief", "child", "chimney", "choice", "choose", "chronic", "chuckle", "chunk", "churn", "cigar", "cinnamon", "circle", "citizen", "city", "civil", "claim", "clap", "clarify", "claw", "clay", "clean", "clerk", "clever", "click", "client", "cliff", "climb", "clinic", "clip", "clock", "clog", "close", "cloth", "cloud", "clown", "club", "clump", "cluster", "clutch", "coach", "coast", "coconut", "code", "coffee", "coil", "coin", "collect", "color", "column", "combine", "come", "comfort", "comic", "common", "company", "concert", "conduct", "confirm", "congress", "connect", "consider", "control", "convince", "cook", "cool", "copper", "copy", "coral", "core", "corn", "correct", "cost", "cotton", "couch", "country", "couple", "course", "cousin", "cover", "coyote", "crack", "cradle", "craft", "cram", "crane", "crash", "crater", "crawl", "crazy", "cream", "credit", "creek", "crew", "cricket", "crime", "crisp", "critic", "crop", "cross", "crouch", "crowd", "crucial", "cruel", "cruise", "crumble", "crunch", "crush", "cry", "crystal", "cube", "culture", "cup", "cupboard", "curious", "current", "curtain", "curve", "cushion", "custom", "cute", "cycle", "dad", "damage", "damp", "dance", "danger", "daring", "dash", "daughter", "dawn", "day", "deal", "debate", "debris", "decade", "december", "decide", "decline", "decorate", "decrease", "deer", "defense", "define", "defy", "degree", "delay", "deliver", "demand", "demise", "denial", "dentist", "deny", "depart", "depend", "deposit", "depth", "deputy", "derive", "describe", "desert", "design", "desk", "despair", "destroy", "detail", "detect", "develop", "device", "devote", "diagram", "dial", "diamond", "diary", "dice", "diesel", "diet", "differ", "digital", "dignity", "dilemma", "dinner", "dinosaur", "direct", "dirt", "disagree", "discover", "disease", "dish", "dismiss", "disorder", "display", "distance", "divert", "divide", "divorce", "dizzy", "doctor", "document", "dog", "doll", "dolphin", "domain", "donate", "donkey", "donor", "door", "dose", "double", "dove", "draft", "dragon", "drama", "drastic", "draw", "dream", "dress", "drift", "drill", "drink", "drip", "drive", "drop", "drum", "dry", "duck", "dumb", "dune", "during", "dust", "dutch", "duty", "dwarf", "dynamic", "eager", "eagle", "early", "earn", "earth", "easily", "east", "easy", "echo", "ecology", "economy", "edge", "edit", "educate", "effort", "egg", "eight", "either", "elbow", "elder", "electric", "elegant", "element", "elephant", "elevator", "elite", "else", "embark", "embody", "embrace", "emerge", "emotion", "employ", "empower", "empty", "enable", "enact", "end", "endless", "endorse", "enemy", "energy", "enforce", "engage", "engine", "enhance", "enjoy", "enlist", "enough", "enrich", "enroll", "ensure", "enter", "entire", "entry", "envelope", "episode", "equal", "equip", "era", "erase", "erode", "erosion", "error", "erupt", "escape", "essay", "essence", "estate", "eternal", "ethics", "evidence", "evil", "evoke", "evolve", "exact", "example", "excess", "exchange", "excite", "exclude", "excuse", "execute", "exercise", "exhaust", "exhibit", "exile", "exist", "exit", "exotic", "expand", "expect", "expire", "explain", "expose", "express", "extend", "extra", "eye", "eyebrow", "fabric", "face", "faculty", "fade", "faint", "faith", "fall", "false", "fame", "family", "famous", "fan", "fancy", "fantasy", "farm", "fashion", "fat", "fatal", "father", "fatigue", "fault", "favorite", "feature", "february", "federal", "fee", "feed", "feel", "female", "fence", "festival", "fetch", "fever", "few", "fiber", "fiction", "field", "figure", "file", "film", "filter", "final", "find", "fine", "finger", "finish", "fire", "firm", "first", "fiscal", "fish", "fit", "fitness", "fix", "flag", "flame", "flash", "flat", "flavor", "flee", "flight", "flip", "float", "flock", "floor", "flower", "fluid", "flush", "fly", "foam", "focus", "fog", "foil", "fold", "follow", "food", "foot", "force", "forest", "forget", "fork", "fortune", "forum", "forward", "fossil", "foster", "found", "fox", "fragile", "frame", "frequent", "fresh", "friend", "fringe", "frog", "front", "frost", "frown", "frozen", "fruit", "fuel", "fun", "funny", "furnace", "fury", "future", "gadget", "gain", "galaxy", "gallery", "game", "gap", "garage", "garbage", "garden", "garlic", "garment", "gas", "gasp", "gate", "gather", "gauge", "gaze", "general", "genius", "genre", "gentle", "genuine", "gesture", "ghost", "giant", "gift", "giggle", "ginger", "giraffe", "girl", "give", "glad", "glance", "glare", "glass", "glide", "glimpse", "globe", "gloom", "glory", "glove", "glow", "glue", "goat", "goddess", "gold", "good", "goose", "gorilla", "gospel", "gossip", "govern", "gown", "grab", "grace", "grain", "grant", "grape", "grass", "gravity", "great", "green", "grid", "grief", "grit", "grocery", "group", "grow", "grunt", "guard", "guess", "guide", "guilt", "guitar", "gun", "gym", "habit", "hair", "half", "hammer", "hamster", "hand", "happy", "harbor", "hard", "harsh", "harvest", "hat", "have", "hawk", "hazard", "head", "health", "heart", "heavy", "hedgehog", "height", "hello", "helmet", "help", "hen", "hero", "hidden", "high", "hill", "hint", "hip", "hire", "history", "hobby", "hockey", "hold", "hole", "holiday", "hollow", "home", "honey", "hood", "hope", "horn", "horror", "horse", "hospital", "host", "hotel", "hour", "hover", "hub", "huge", "human", "humble", "humor", "hundred", "hungry", "hunt", "hurdle", "hurry", "hurt", "husband", "hybrid", "ice", "icon", "idea", "identify", "idle", "ignore", "ill", "illegal", "illness", "image", "imitate", "immense", "immune", "impact", "impose", "improve", "impulse", "inch", "include", "income", "increase", "index", "indicate", "indoor", "industry", "infant", "inflict", "inform", "inhale", "inherit", "initial", "inject", "injury", "inmate", "inner", "innocent", "input", "inquiry", "insane", "insect", "inside", "inspire", "install", "intact", "interest", "into", "invest", "invite", "involve", "iron", "island", "isolate", "issue", "item", "ivory", "jacket", "jaguar", "jar", "jazz", "jealous", "jeans", "jelly", "jewel", "job", "join", "joke", "journey", "joy", "judge", "juice", "jump", "jungle", "junior", "junk", "just", "kangaroo", "keen", "keep", "ketchup", "key", "kick", "kid", "kidney", "kind", "kingdom", "kiss", "kit", "kitchen", "kite", "kitten", "kiwi", "knee", "knife", "knock", "know", "lab", "label", "labor", "ladder", "lady", "lake", "lamp", "language", "laptop", "large", "later", "latin", "laugh", "laundry", "lava", "law", "lawn", "lawsuit", "layer", "lazy", "leader", "leaf", "learn", "leave", "lecture", "left", "leg", "legal", "legend", "leisure", "lemon", "lend", "length", "lens", "leopard", "lesson", "letter", "level", "liar", "liberty", "library", "license", "life", "lift", "light", "like", "limb", "limit", "link", "lion", "liquid", "list", "little", "live", "lizard", "load", "loan", "lobster", "local", "lock", "logic", "lonely", "long", "loop", "lottery", "loud", "lounge", "love", "loyal", "lucky", "luggage", "lumber", "lunar", "lunch", "luxury", "lyrics", "machine", "mad", "magic", "magnet", "maid", "mail", "main", "major", "make", "mammal", "man", "manage", "mandate", "mango", "mansion", "manual", "maple", "marble", "march", "margin", "marine", "market", "marriage", "mask", "mass", "master", "match", "material", "math", "matrix", "matter", "maximum", "maze", "meadow", "mean", "measure", "meat", "mechanic", "medal", "media", "melody", "melt", "member", "memory", "mention", "menu", "mercy", "merge", "merit", "merry", "mesh", "message", "metal", "method", "middle", "midnight", "milk", "million", "mimic", "mind", "minimum", "minor", "minute", "miracle", "mirror", "misery", "miss", "mistake", "mix", "mixed", "mixture", "mobile", "model", "modify", "mom", "moment", "monitor", "monkey", "monster", "month", "moon", "moral", "more", "morning", "mosquito", "mother", "motion", "motor", "mountain", "mouse", "move", "movie", "much", "muffin", "mule", "multiply", "muscle", "museum", "mushroom", "music", "must", "mutual", "myself", "mystery", "myth", "naive", "name", "napkin", "narrow", "nasty", "nation", "nature", "near", "neck", "need", "negative", "neglect", "neither", "nephew", "nerve", "nest", "net", "network", "neutral", "never", "news", "next", "nice", "night", "noble", "noise", "nominee", "noodle", "normal", "north", "nose", "notable", "note", "nothing", "notice", "novel", "now", "nuclear", "number", "nurse", "nut", "oak", "obey", "object", "oblige", "obscure", "observe", "obtain", "obvious", "occur", "ocean", "october", "odor", "off", "offer", "office", "often", "oil", "okay", "old", "olive", "olympic", "omit", "once", "one", "onion", "online", "only", "open", "opera", "opinion", "oppose", "option", "orange", "orbit", "orchard", "order", "ordinary", "organ", "orient", "original", "orphan", "ostrich", "other", "outdoor", "outer", "output", "outside", "oval", "oven", "over", "own", "owner", "oxygen", "oyster", "ozone", "pact", "paddle", "page", "pair", "palace", "palm", "panda", "panel", "panic", "panther", "paper", "parade", "parent", "park", "parrot", "party", "pass", "patch", "path", "patient", "patrol", "pattern", "pause", "pave", "payment", "peace", "peanut", "pear", "peasant", "pelican", "pen", "penalty", "pencil", "people", "pepper", "perfect", "permit", "person", "pet", "phone", "photo", "phrase", "physical", "piano", "picnic", "picture", "piece", "pig", "pigeon", "pill", "pilot", "pink", "pioneer", "pipe", "pistol", "pitch", "pizza", "place", "planet", "plastic", "plate", "play", "please", "pledge", "pluck", "plug", "plunge", "poem", "poet", "point", "polar", "pole", "police", "pond", "pony", "pool", "popular", "portion", "position", "possible", "post", "potato", "pottery", "poverty", "powder", "power", "practice", "praise", "predict", "prefer", "prepare", "present", "pretty", "prevent", "price", "pride", "primary", "print", "priority", "prison", "private", "prize", "problem", "process", "produce", "profit", "program", "project", "promote", "proof", "property", "prosper", "protect", "proud", "provide", "public", "pudding", "pull", "pulp", "pulse", "pumpkin", "punch", "pupil", "puppy", "purchase", "purity", "purpose", "purse", "push", "put", "puzzle", "pyramid", "quality", "quantum", "quarter", "question", "quick", "quit", "quiz", "quote", "rabbit", "raccoon", "race", "rack", "radar", "radio", "rail", "rain", "raise", "rally", "ramp", "ranch", "random", "range", "rapid", "rare", "rate", "rather", "raven", "raw", "razor", "ready", "real", "reason", "rebel", "rebuild", "recall", "receive", "recipe", "record", "recycle", "reduce", "reflect", "reform", "refuse", "region", "regret", "regular", "reject", "relax", "release", "relief", "rely", "remain", "remember", "remind", "remove", "render", "renew", "rent", "reopen", "repair", "repeat", "replace", "report", "require", "rescue", "resemble", "resist", "resource", "response", "result", "retire", "retreat", "return", "reunion", "reveal", "review", "reward", "rhythm", "rib", "ribbon", "rice", "rich", "ride", "ridge", "rifle", "right", "rigid", "ring", "riot", "ripple", "risk", "ritual", "rival", "river", "road", "roast", "robot", "robust", "rocket", "romance", "roof", "rookie", "room", "rose", "rotate", "rough", "round", "route", "royal", "rubber", "rude", "rug", "rule", "run", "runway", "rural", "sad", "saddle", "sadness", "safe", "sail", "salad", "salmon", "salon", "salt", "salute", "same", "sample", "sand", "satisfy", "satoshi", "sauce", "sausage", "save", "say", "scale", "scan", "scare", "scatter", "scene", "scheme", "school", "science", "scissors", "scorpion", "scout", "scrap", "screen", "script", "scrub", "sea", "search", "season", "seat", "second", "secret", "section", "security", "seed", "seek", "segment", "select", "sell", "seminar", "senior", "sense", "sentence", "series", "service", "session", "settle", "setup", "seven", "shadow", "shaft", "shallow", "share", "shed", "shell", "sheriff", "shield", "shift", "shine", "ship", "shiver", "shock", "shoe", "shoot", "shop", "short", "shoulder", "shove", "shrimp", "shrug", "shuffle", "shy", "sibling", "sick", "side", "siege", "sight", "sign", "silent", "silk", "silly", "silver", "similar", "simple", "since", "sing", "siren", "sister", "situate", "six", "size", "skate", "sketch", "ski", "skill", "skin", "skirt", "skull", "slab", "slam", "sleep", "slender", "slice", "slide", "slight", "slim", "slogan", "slot", "slow", "slush", "small", "smart", "smile", "smoke", "smooth", "snack", "snake", "snap", "sniff", "snow", "soap", "soccer", "social", "sock", "soda", "soft", "solar", "soldier", "solid", "solution", "solve", "someone", "song", "soon", "sorry", "sort", "soul", "sound", "soup", "source", "south", "space", "spare", "spatial", "spawn", "speak", "special", "speed", "spell", "spend", "sphere", "spice", "spider", "spike", "spin", "spirit", "split", "spoil", "sponsor", "spoon", "sport", "spot", "spray", "spread", "spring", "spy", "square", "squeeze", "squirrel", "stable", "stadium", "staff", "stage", "stairs", "stamp", "stand", "start", "state", "stay", "steak", "steel", "stem", "step", "stereo", "stick", "still", "sting", "stock", "stomach", "stone", "stool", "story", "stove", "strategy", "street", "strike", "strong", "struggle", "student", "stuff", "stumble", "style", "subject", "submit", "subway", "success", "such", "sudden", "suffer", "sugar", "suggest", "suit", "summer", "sun", "sunny", "sunset", "super", "supply", "supreme", "sure", "surface", "surge", "surprise", "surround", "survey", "suspect", "sustain", "swallow", "swamp", "swap", "swarm", "swear", "sweet", "swift", "swim", "swing", "switch", "sword", "symbol", "symptom", "syrup", "system", "table", "tackle", "tag", "tail", "talent", "talk", "tank", "tape", "target", "task", "taste", "tattoo", "taxi", "teach", "team", "tell", "ten", "tenant", "tennis", "tent", "term", "test", "text", "thank", "that", "theme", "then", "theory", "there", "they", "thing", "this", "thought", "three", "thrive", "throw", "thumb", "thunder", "ticket", "tide", "tiger", "tilt", "timber", "time", "tiny", "tip", "tired", "tissue", "title", "toast", "tobacco", "today", "toddler", "toe", "together", "toilet", "token", "tomato", "tomorrow", "tone", "tongue", "tonight", "tool", "tooth", "top", "topic", "topple", "torch", "tornado", "tortoise", "toss", "total", "tourist", "toward", "tower", "town", "toy", "track", "trade", "traffic", "tragic", "train", "transfer", "trap", "trash", "travel", "tray", "treat", "tree", "trend", "trial", "tribe", "trick", "trigger", "trim", "trip", "trophy", "trouble", "truck", "true", "truly", "trumpet", "trust", "truth", "try", "tube", "tuition", "tumble", "tuna", "tunnel", "turkey", "turn", "turtle", "twelve", "twenty", "twice", "twin", "twist", "two", "type", "typical", "ugly", "umbrella", "unable", "unaware", "uncle", "uncover", "under", "undo", "unfair", "unfold", "unhappy", "uniform", "unique", "unit", "universe", "unknown", "unlock", "until", "unusual", "unveil", "update", "upgrade", "uphold", "upon", "upper", "upset", "urban", "urge", "usage", "use", "used", "useful", "useless", "usual", "utility", "vacant", "vacuum", "vague", "valid", "valley", "valve", "van", "vanish", "vapor", "various", "vast", "vault", "vehicle", "velvet", "vendor", "venture", "venue", "verb", "verify", "version", "very", "vessel", "veteran", "viable", "vibrant", "vicious", "victory", "video", "view", "village", "vintage", "violin", "virtual", "virus", "visa", "visit", "visual", "vital", "vivid", "vocal", "voice", "void", "volcano", "volume", "vote", "voyage", "wage", "wagon", "wait", "walk", "wall", "walnut", "want", "warfare", "warm", "warrior", "wash", "wasp", "waste", "water", "wave", "way", "wealth", "weapon", "wear", "weasel", "weather", "web", "wedding", "weekend", "weird", "welcome", "west", "wet", "whale", "what", "wheat", "wheel", "when", "where", "whip", "whisper", "wide", "width", "wife", "wild", "will", "win", "window", "wine", "wing", "wink", "winner", "winter", "wire", "wisdom", "wise", "wish", "witness", "wolf", "woman", "wonder", "wood", "wool", "word", "work", "world", "worry", "worth", "wrap", "wreck", "wrestle", "wrist", "write", "wrong", "yard", "year", "yellow", "you", "young", "youth", "zebra", "zero", "zone", "zoo"];
+
+  var N = 11;
+
+  var slotsEl = document.getElementById('bits');
+  var bufferEl = document.getElementById('bufferText');
+  var bufferIndexEl = document.getElementById('bufferIndex');
+  var clearEl = document.getElementById('clear');
+  var row1 = document.getElementById('row1');
+  var row2 = document.getElementById('row2');
+  var row3 = document.getElementById('row3');
+  var backspaceEl = document.getElementById('backspace');
+  var revealEl = document.getElementById('reveal');
+
+  var LAYOUT = [
+    'qwertyuiop'.split(''),
+    'asdfghjkl'.split(''),
+    'zxcvbnm'.split('')
+  ];
+  var ROW_EL = [row1, row2, row3];
+
+  var mode = null;           // null | 'keys' | 'slider'
+  var buffer = '';           // built by typing
+  var sliderBits = new Array(N).fill(null); // built by sliding
+  var keyEls = {};
+  var bitEls = [];
+
+  LAYOUT.forEach(function(rowLetters, r){
+    rowLetters.forEach(function(letter){
+      var key = document.createElement('button');
+      key.className = 'key';
+      key.type = 'button';
+      key.textContent = letter;
+      key.setAttribute('aria-label', letter);
+      key.addEventListener('click', function(){
+        if (mode !== 'keys'){
+          mode = 'keys';
+          sliderBits = new Array(N).fill(null);
+          buffer = '';
+        }
+        buffer += letter;
+        renderBitsFromBuffer();
+        renderKeys();
+      });
+      keyEls[letter] = key;
+      ROW_EL[r].appendChild(key);
+    });
+  });
+
+  // ---- bit sliders (interactive: click upper/lower half to set 1/0) ----
+  for (var i = 0; i < N; i++){
+    (function(i){
+      var slot = document.createElement('div');
+      slot.className = 'slot';
+      slot.setAttribute('role', 'button');
+      slot.setAttribute('aria-label', 'Bit ' + (i + 1) + ' of ' + N);
+      slot.dataset.state = '0';
+
+      var d1 = document.createElement('div');
+      d1.className = 'digit d1';
+      d1.textContent = '1';
+      var d0 = document.createElement('div');
+      d0.className = 'digit d0';
+      d0.textContent = '0';
+      var knob = document.createElement('div');
+      knob.className = 'knob';
+
+      slot.appendChild(d1);
+      slot.appendChild(d0);
+      slot.appendChild(knob);
+
+      slot.addEventListener('click', function(e){
+        if (mode !== 'slider'){
+          mode = 'slider';
+          buffer = '';
+          renderKeys();
+        }
+        var rect = slot.getBoundingClientRect();
+        var y = e.clientY - rect.top;
+        var v = (y < rect.height / 2) ? 1 : 0;
+        sliderBits[i] = v;
+        renderBitsFromSlider();
+      });
+
+      slotsEl.appendChild(slot);
+      bitEls.push(slot);
+    })(i);
+  }
+
+  function isPrefix(s){
+    if (s === '') return true;
+    for (var i = 0; i < WORDS.length; i++){
+      if (WORDS[i].indexOf(s) === 0) return true;
+    }
+    return false;
+  }
+
+  function exactWord(s){
+    for (var i = 0; i < WORDS.length; i++){
+      if (WORDS[i] === s) return i;
+    }
+    return -1;
+  }
+
+  function renderKeys(){
+    for (var letter in keyEls){
+      var allowed = isPrefix(buffer + letter);
+      keyEls[letter].classList.toggle('disabled', !allowed);
+    }
+  }
+
+  function updateIndexDisplay(idx){
+    if (idx === -1){
+      bufferIndexEl.textContent = '';
+      return;
+    }
+    var n = String(idx + 1);
+    while (n.length < 4) n = '0' + n;
+    bufferIndexEl.textContent = n;
+  }
+
+  function renderBitsFromBuffer(){
+    bufferEl.textContent = buffer;
+    var idx = exactWord(buffer);
+    updateIndexDisplay(idx);
+    var bin = (idx !== -1) ? idx.toString(2) : '0';
+    while (bin.length < N) bin = '0' + bin;
+    for (var i = 0; i < N; i++){
+      bitEls[i].dataset.state = bin.charAt(i);
+    }
+  }
+
+  function renderBitsFromSlider(){
+    for (var i = 0; i < N; i++){
+      bitEls[i].dataset.state = (sliderBits[i] === null) ? '0' : String(sliderBits[i]);
+    }
+    var complete = sliderBits.every(function(v){ return v !== null; });
+    if (complete){
+      var idx = 0;
+      for (var i = 0; i < N; i++){ idx = (idx << 1) | sliderBits[i]; }
+      buffer = WORDS[idx];
+      updateIndexDisplay(idx);
+    } else {
+      buffer = '';
+      updateIndexDisplay(-1);
+    }
+    bufferEl.textContent = buffer;
+  }
+
+  function resetAll(){
+    mode = null;
+    buffer = '';
+    sliderBits = new Array(N).fill(null);
+    renderBitsFromBuffer();
+    renderKeys();
+  }
+
+  revealEl.addEventListener('click', function(){
+    if (mode !== 'slider'){
+      mode = 'slider';
+      buffer = '';
+      renderKeys();
+    }
+    var idx = 0;
+    for (var i = 0; i < N; i++){
+      idx = (idx << 1) | (sliderBits[i] === 1 ? 1 : 0);
+    }
+    buffer = WORDS[idx];
+    bufferEl.textContent = buffer;
+    updateIndexDisplay(idx);
+  });
+
+  backspaceEl.addEventListener('click', function(){
+    if (mode !== 'keys'){
+      mode = 'keys';
+      sliderBits = new Array(N).fill(null);
+      buffer = '';
+    } else {
+      buffer = buffer.slice(0, -1);
+    }
+    renderBitsFromBuffer();
+    renderKeys();
+  });
+
+  clearEl.addEventListener('click', resetAll);
+
+  resetAll();
+})();
+</script>
+</body>
+</html>
