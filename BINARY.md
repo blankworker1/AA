@@ -15,9 +15,11 @@ A small wooden desk/office object: a row of **11 sliders**, styled after old in/
 - The physical sliders and the digital tool are two **separate, non-interacting layers** — there's no sensor and no state transfer between them. Setting the wooden sliders doesn't set anything on screen, and vice versa.
 - No text, no explanation anywhere on the object.
 
-## The digital tool
+## The digital dashboard 
 
-Scanning the QR code opens a single-page companion tool with the same materials language as the object — dark iron plate, brass fittings, ivory sliders and keys — that works two ways:
+[dashboard link]
+
+Scanning the QR code opens a single-page html companion tool with the same materials language as the object — dark iron plate, brass fittings, ivory sliders and keys — that works two ways:
 
 **Sliders → word.** A row of 11 sliders, identical in spirit to the physical piece. Tap the top or bottom half of a slider to set it to 1 or 0. Once all 11 are set, the matching BIP39 word appears in the display above. A brass button at the end of the row forces a reveal at any point, treating any untouched slider as 0.
 
