@@ -1,4 +1,4 @@
-# BITBLOCK132 — Handover Note (v2)
+# BITBLOCK132
 
 *An Anonymous Art (AA) artifact. Concept stage, design largely resolved. Not yet built.*
 
