@@ -1,4 +1,4 @@
-# BITBLOCK132 — Handover Note (v2)
+# BITBLOCK132
 
 *An Anonymous Art (AA) artifact. Concept stage, design largely resolved. Not yet built.*
 
@@ -6,7 +6,7 @@
 
 A standalone gallery piece: a 12×11 grid (132 total) of standard clear glass blocks, each independently addressable and internally lit. Each block represents one bit. The full grid is scaled to 132 bits — the entropy-plus-checksum length of a complete 12-word BIP39 seed, the same figure established in the [[CHECKSUM]] education panel — laid out as 12 rows of 11 blocks, one row per word.
 
-The piece is controlled live via a touch webapp, in the same visual/UX family as [[BINARY]]'s companion webapp, served directly by an onboard ESP32 acting as its own WiFi access point. Anyone connected can tap a block to toggle it on/off, and can change a single shared "on" color that applies to all lit blocks. There is no reset, no default position, and no state persistence across power cycles — the grid always starts blank on power-up and holds state only in RAM while running, the same principle a SeedSigner uses: nothing sensitive can be at rest in the device, by design.
+The piece is controlled live via a touch webapp, in the same visual/UX family as [[BINARY]]'s dashboard webapp, served directly by an onboard ESP32 acting as its own WiFi access point. Anyone connected can tap a block to toggle it on/off, and can change a single shared "on" color that applies to all lit blocks. There is no reset, no default position, and no state persistence across power cycles — the grid always starts blank on power-up and holds state only in RAM while running, the same principle a SeedSigner uses: nothing sensitive can be at rest in the device, by design.
 
 ## Two use modes
 
@@ -57,4 +57,4 @@ Design substantially resolved at concept level: form factor, addressing scheme, 
 
 ## Relationship to other pieces
 
-Third in the same conceptual family as [[relay-checksum-machine]] (CHECKSUM/ASRC, exhibition-scale working machine) and [[binary-word-slider]] (BINARY, desk-scale single word) — same core idea, a bit made physically visible, at three different scales and registers. No shared build dependency with either, but shares the ephemeral/no-persistent-key design principle with CHECKSUM's ceremony step, and the touch-webapp control language with BINARY's companion app.
+Third in the same conceptual family as [[relay-checksum-machine]] (CHECKSUM, exhibition-scale working machine) and [[binary-word-slider]] (BINARY, desk-scale single word) — same core idea, a bit made physically visible, at three different scales and registers. No shared build dependency with either, but shares the ephemeral/no-persistent-key design principle with CHECKSUM's ceremony step, and the touch-webapp control language with BINARY's companion app.
