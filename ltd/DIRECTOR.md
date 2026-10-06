@@ -26,7 +26,8 @@ overseeing custody of company assets, digital and physical
 
 The Director executes decisions approved by shareholders.
 
-Custody of the company's Bitcoin is shared, not sole. The method of custody chosen under the Articles (clause 11.2) is the Treasury: a multisig wallet, in which the Director is one of three Treasury signatories, alongside two of the NEDs. The Director executes a movement of the treasury but cannot sign it alone (see TREASURY.md).
+
+NOTE: Custody of the company's Bitcoin is shared, not sole. The method of custody chosen under the Articles (clause 11.2) is the Treasury: a multisig wallet, in which the Director is one of three Treasury signatories, alongside two of the NEDs. The Director executes a movement of the treasury but cannot sign it alone (see TREASURY.md).
 
 
 ---
