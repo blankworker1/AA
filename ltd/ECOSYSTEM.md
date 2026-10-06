@@ -28,7 +28,7 @@ Interfaces with galleries, collectors, and tippers.
 
 ---
 
-## 3. The Privy Council: NEDs
+## 3. The Witnesses: NEDs
 
 Specialist advisors who protect, guide, and maintain the conceptual and operational integrity of the company/artwork.
 
