@@ -83,6 +83,8 @@ Open Secret — participatory, tip-driven digital art
 
 Gold — limited-edition physical bars with embedded cryptographic identity
 
+MINE — a hybrid cube artwork, screen and Bitcoin miner
+
 
 Each work is finite, numbered, and permanently recorded.
 
@@ -128,7 +130,22 @@ FOOLS GOLD is performance, object, and critique.
 
 ---
 
-## PAGE 11 — THE COMPANY
+## PAGE 11 — MINE
+
+MINE is a self-contained cube: one face a screen, one face a working Bitcoin miner.
+
+It is released only after a digital work has proven its resonance — shown at a price, with no buy button.
+
+Resonance sets rarity. Rarity sets price.
+
+The record of public reaction becomes its provenance.
+
+MINE is object, image, and machine.
+
+
+---
+
+## PAGE 12 — THE COMPANY
 
 Anonymous Art Ltd is a UK private limited company.
 
@@ -144,7 +161,7 @@ Issue and administer 21 ordinary shares
 
 ---
 
-## PAGE 12 — SHARE STRUCTURE
+## PAGE 13 — SHARE STRUCTURE
 
 21 ordinary shares
 
@@ -159,23 +176,14 @@ R4 — Residual Edition: Automatic archival edition, preserves ownership record,
 
 Equal voting rights for active editions (A4 and C4)
 
-
 Single class of active shares per 4-year cycle
 
 No further issuance without supermajority (75%) approval
 
-Each share has a nominal value of £1,000,000, partly paid (£1).
 
+Each share has a nominal value of £1,000,000, partly paid.
 
----
-
-## PAGE 13 — PARTLY PAID SHARES
-
-Each shareholder pays £1 to satisfy statutory paid-up requirements.
-
-Any additional consideration is not share capital.
-
-It is payment for the associated artwork.
+Each shareholder pays £1 to satisfy statutory paid-up requirements. Any additional consideration is not share capital; it is payment for the associated artwork.
 
 No calls may ever be issued.
 
@@ -301,18 +309,3 @@ No footnotes.
 No contact details.
 
 If this resonates, you already know what to do.
-
----
-
-
-
-4. Single class of active shares per 4-year cycle
-
-
-5. No further issuance without supermajority (75%) approval
-
-
-6. Each share has a nominal value of £1,000,000, partly paid (£1).
-
-
-
