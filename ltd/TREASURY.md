@@ -2,7 +2,7 @@
 
 *Anonymous Art Ltd's node — the company's sovereign vault.*
 
-The Treasury is a full-validating Bitcoin node, housed in a locked metal safe with its own backup power. It is the company's bank, its auditor, and its broadcaster — and, like everything in Anonymous Art, it is also a work. Where the [Articles](ARTICLES.md) promise that AA Ltd holds its assets directly and through no intermediary, the Treasury is that promise made physical. It is the point where the company stops describing sovereignty and starts operating it.
+The Treasury is a full-validating Bitcoin node, housed in a locked metal safe with its own backup power. It is the company's bank, its auditor, and its broadcaster — and, like everything in Anonymous Art, it is also a work. Where the [Articles](ARTICLES.md) promise that AA Ltd holds its assets directly and through no intermediary, the Treasury is that promise made physical. It is the point where the company stops describing self sovereignty and starts operating it.
 
 A node does not create wealth and does not, by itself, hold coins. What it does is more fundamental to a treasury: it lets the company verify its own holdings and move them without asking permission and without revealing anything to anyone. A company that checks its balance through someone else's server is not sovereign — it is a customer. The Treasury is the organ through which AA Ltd owns its view of the truth. It is the one organ of the company that cannot be made to lie.
 
