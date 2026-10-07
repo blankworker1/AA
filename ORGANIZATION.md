@@ -71,9 +71,9 @@ Participation runs at two levels — open, in the movement; defined, in the comp
 
 - **The Chosen — Shareholders (21).** The sovereign core. They own but do not operate: custodial, not executive. They appoint and remove the Director, amend the Articles, and decide reserved matters. Each share is itself a certificate-artwork. May be publicly anonymous. See [SHAREHOLDER.md](ltd/SHAREHOLDER.md).
 - **The King — Director (1).** The sole executive and legal interface: statutory filings, compliance, custody of assets, execution of shareholder decisions. Holds the structure together; does not author the work. See [DIRECTOR.md](ltd/DIRECTOR.md).
-- **The Witnesses — Non-Executive Directors (6).** One per domain: legal/IP, compliance, tax, technical, curatorial, communications. They advise, witness, and challenge; they hold no executive power and produce no works. They are living constraints that keep the project from collapsing into commerce or spectacle. See [NED.md](ltd/NED.md).
+- **The Witnesses — Advisors (6).** One per domain: legal/IP, compliance, tax, technical, curatorial, communications. They advise, witness, and challenge; they are an advisory council, not directors — not appointed to the board, not filed at Companies House — and they hold no executive power and produce no works. They are living constraints that keep the project from collapsing into commerce or spectacle. See [ADVISORS.md](ltd/ADVISORS.md).
 - **The Public / Tippers.** Visitors, participants, tippers. They cannot claim shares, but their attention and micro-payments are the system's fuel, and they are co-creators of its living economy. The Public is where the movement and the company meet.
-- **The Treasury.** The company's node, held in a 2-of-3 multisig by three Treasury signatories — the Director and two of the Witnesses. AA Ltd's vault and broadcaster, and the organ that verifies its own holdings, moved by no single hand. See [TREASURY.md](ltd/TREASURY.md).
+- **The Treasury.** The company's node, held in a 2-of-3 multisig by three Treasury signatories — the Director and two of the Witnesses. AA Ltd's vault and broadcaster, and the organ that verifies its own holdings, moved by no single hand. Whether holding a key is compatible with a Witness's advisory status is an open question for the legal Witness. See [TREASURY.md](ltd/TREASURY.md).
 
 Authority runs one way, execution the other: **the Shareholders decide, the Director executes, the Witnesses advise, the Public fuels.** See [ECOSYSTEM.md](ltd/ECOSYSTEM.md).
 
@@ -94,6 +94,6 @@ No rung is sold. The movement never markets; the company never convinces. Silenc
 
 ## Anonymity, and its limit
 
-Anonymity is real at three points: **authorship** (works carry no signature), **shareholding** (the Chosen may stay publicly anonymous), and **the council** (NEDs may serve pseudonymously).
+Anonymity is real at three points: **authorship** (works carry no signature), **shareholding** (the Chosen may stay publicly anonymous), and **the council** (the Witnesses may serve pseudonymously, because they are advisors and not directors).
 
 It has one legal floor, stated plainly rather than implied away: as a UK company, AA Ltd must file its Director and any person of significant control with Companies House, on the public record, and must keep a register of members holding shareholders' true legal names. The register is private; the directorship is not. Public-facing anonymity is complete; legal anonymity is not.
