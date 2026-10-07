@@ -12,7 +12,7 @@ Key elements:
 2. Director (“The King”) – central figure bridging law, assets, and narrative.
 
 
-3. Witnesses (Advisors) – six advisors around the Director, outside the board: Legal/IP, Compliance, Tax, Technical, Curatorial, Communications.
+3. Advisors (Witnesses) – six advisors around the Director, outside the board: Legal/IP, Compliance, Tax, Technical, Curatorial, Communications.
 
 
 4. Public / Tippers – periphery; represent gallery visitors and participants.
