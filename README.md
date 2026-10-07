@@ -351,7 +351,7 @@ but unfolding a future that we already knew.
 
 ## ANNEX — ARTIFACTS
 
-Standalone artifact specifications, each developed in full and held as its own document in the `artifacts/` folder of this repository. Each entry below gives a short description and links to the complete spec. For how these works relate to Anonymous Art Ltd and the wider movement, see [ORGANIZATION.md](ORGANIZATION.md).
+Standalone artifact specifications, each developed in full and held as its own document in the `artifacts/` folder of this repository. Each entry below gives a short description and links to the complete spec. For how these works relate to Anonymous Art Ltd and the wider movement, see [ORGANIZATION.md](guides/ORGANIZATION.md).
 
 
 ### Annex #1 — 12 COMMANDMENTS
